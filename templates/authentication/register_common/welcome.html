@@ -1,0 +1,450 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% block title %} Welcome | Besity {% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor/addtohomescreen/css/addtohomescreen.css">
+
+<div id="welcome-page" class="container-fluid h-100 background-light">
+	<div class="row h-25 text-right shape-background shape-background-right" style="background-image: url('/static/assets/img/welcome/Shapes-01.svg')">
+	</div>
+	<div class="row h-50 text-center">
+	<div id="welcome-to-besity" style="z-index:999">
+            <h1>Welcome to</h1>
+            <svg style="margin: 1%;" xmlns="http://www.w3.org/2000/svg" width="226.065" height="73.752" viewBox="0 0 226.065 73.752">
+                <g id="Group_146" data-name="Group 146" transform="translate(-128 -413.776)">
+                  <g id="Calque_7" data-name="Calque 7" transform="translate(128 413.776)">
+                    <g id="Group_2" data-name="Group 2" transform="translate(0 0)">
+                      <path id="Path_1" data-name="Path 1" d="M1026.2,1083.05l-9.67,27.116-11.73-27.116h-9.476l16.915,39.149-.484,1.357c-1.682,4.661-3.593,6.879-7.413,6.879-1.681,0-3.363-.688-5.732-1.758l-2.522,6.5a18.089,18.089,0,0,0,9.552,2.9c6.42,0,12.152-4.663,15.668-14.521l14.446-40.506Z" transform="translate(-809.688 -1064.326)" fill="#171716"/>
+                      <path id="Path_2" data-name="Path 2" d="M887.232,1080.649c-2.6,0-4.051-2.14-4.051-5.656v-20.941h9.172v-7.107H883.03v-11.77h-8.408v5.656c0,4.585-1.529,6.114-6.114,6.114h-1.759v7.107h6.879v23.693a10.509,10.509,0,0,0,10.7,10.776c4.586,0,7.337-1.3,11.082-3.439l-2.675-6.5c-2.292,1.223-3.745,2.063-5.5,2.063" transform="translate(-712.723 -1028.22)" fill="#171716"/>
+                      <g id="Group_1" data-name="Group 1" transform="translate(135.875)">
+                        <path id="Path_3" data-name="Path 3" d="M799.029,1006.884a6.114,6.114,0,1,0,6.114,6.114,6.132,6.132,0,0,0-6.114-6.114" transform="translate(-792.915 -1006.884)" fill="#171716"/>
+                        <rect id="Rectangle_1" data-name="Rectangle 1" width="9.553" height="40.506" transform="translate(1.338 18.724)" fill="#171716"/>
+                      </g>
+                      <path id="Path_4" data-name="Path 4" d="M648.985,1096.278l-6.649-.841c-3.668-.458-5.579-1.375-5.579-4.433,0-2.675,2.752-4.661,6.8-4.661,4.2,0,7.49,1.069,13.68,2.827l2.293-7.642c-3.82-1.07-10.24-2.828-15.82-2.828-9.935,0-16.126,5.35-16.126,13.069,0,6.955,4.127,10.317,11.693,11.311l6.42.841c4.357.534,5.808,1.987,5.808,5.121,0,2.216-2.752,4.661-6.8,4.661-4.2,0-8.255-1.529-15.21-4.509l-3.057,7.643c5.351,2.292,11.769,4.509,18.113,4.509,9.936,0,16.126-5.35,16.126-13.069,0-6.956-3.744-11.007-11.693-12" transform="translate(-531.491 -1061.045)" fill="#171716"/>
+                      <path id="Path_5" data-name="Path 5" d="M454.343,1095.587c1.491-5.561,5.827-9.248,11.588-9.248,5.376,0,8.966,3.129,10.357,9.248Zm11.588-16.891c-11.77,0-20.559,9.554-20.559,21.324s8.789,21.322,20.559,21.322c7.108,0,12.916-2.752,18.266-5.273l-3.057-7.565c-7.337,3.21-10.241,5.2-15.208,5.2-6.546,0-11.251-4.758-12.036-11.616h31.066c.765-12.84-6.572-23.387-19.03-23.387" transform="translate(-394.937 -1061.042)" fill="#171716"/>
+                      <path id="Path_6" data-name="Path 6" d="M264.142,1060.815h-13.6v-19.107h13.3c7.567,0,12,2.6,12,9.018,0,7.489-4.357,10.089-11.693,10.089m-13.6-43.182h13.375c5.885,0,9.63,2.675,9.63,8.179,0,6.036-4.357,8.482-10.165,8.482h-12.84Zm22.622,19.719v-.23c5.962-1.3,10.317-5.808,10.317-12.457,0-9.86-7.183-14.675-19.411-14.675H240.22v58.468h23.616c12.686,0,21.934-5.121,21.934-17.043,0-7.567-5.274-12.84-12.61-14.063" transform="translate(-240.22 -1009.226)" fill="#171716"/>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+		</div>
+		<h4 style="z-index:999">A platform to build communities <br>and get the best of the city</h4>
+		<div class="row p-0 m-0" style="z-index:999">
+			<div class="col-12 mx-auto">
+				<p class="m-3">
+					<a class="btn-primary" href="{% url 'choice_account' %}" role="button">Sign up</a>
+				</p>
+			</div>
+		</div>
+		<div class="row p-0 m-0" style="z-index:999">
+			<div class="col-12 mx-auto">
+				<p>
+					Already have an account? <a class="getstarted" href="{% url 'login' %}" role="button" style="text-decoration: underline">Login</a>
+				</p>
+				<p id="pwa-install-dialogue" class="small">
+					<a id="buttonInstall" onclick="installBesity()" class="btn-tertiary getstarted" href="#" role="button">Install Besity on your device</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row h-25 text-left shape-background shape-background-left" style="background-image: url('/static/assets/img/welcome/Shapes-02.svg');">
+	</div>
+</div>
+
+<section id="loader">
+        <div id="loader-div">
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="145.935" height="186.772" viewBox="0 0 145.935 186.772">
+				<defs>
+				  <linearGradient id="linear-gradient" x1="0.002" y1="0.548" x2="0.97" y2="0.43" gradientUnits="objectBoundingBox">
+					<stop offset="0" stop-color="#c47e24"/>
+					<stop offset="0.084" stop-color="#d58923"/>
+					<stop offset="0.203" stop-color="#e79422"/>
+					<stop offset="0.348" stop-color="#f39d22"/>
+					<stop offset="0.542" stop-color="#faa122"/>
+					<stop offset="1" stop-color="#fda322"/>
+				  </linearGradient>
+				  <linearGradient id="linear-gradient-2" x1="0.014" y1="-1.234" x2="0.983" y2="-1.076" gradientUnits="objectBoundingBox">
+					<stop offset="0" stop-color="#134e78"/>
+					<stop offset="0.011" stop-color="#144f7b"/>
+					<stop offset="0.112" stop-color="#1c5c91"/>
+					<stop offset="0.227" stop-color="#2366a3"/>
+					<stop offset="0.367" stop-color="#276caf"/>
+					<stop offset="0.556" stop-color="#2a70b6"/>
+					<stop offset="1" stop-color="#2b72b9"/>
+				  </linearGradient>
+				  <linearGradient id="linear-gradient-3" x1="0.998" y1="0.452" x2="0.03" y2="0.57" gradientUnits="objectBoundingBox">
+					<stop offset="0" stop-color="#9a3b30"/>
+					<stop offset="0.049" stop-color="#a84032"/>
+					<stop offset="0.146" stop-color="#bf4836"/>
+					<stop offset="0.257" stop-color="#d14e3a"/>
+					<stop offset="0.392" stop-color="#dd523c"/>
+					<stop offset="0.573" stop-color="#e4553d"/>
+					<stop offset="1" stop-color="#e7563e"/>
+				  </linearGradient>
+				  <linearGradient id="linear-gradient-4" x1="0.986" y1="2.234" x2="0.017" y2="2.076" xlink:href="#linear-gradient-2"/>
+				</defs>
+				<g id="Group_1" data-name="Group 1" transform="translate(-240.22 -130)">
+				  <g id="Calque_7" data-name="Calque 7" transform="translate(240.22 269.162)">
+					<g id="Group_2" data-name="Group 2" transform="translate(0 0)">
+					  <path id="Path_1" data-name="Path 1" d="M1015.255,1083.05l-6.242,17.5-7.572-17.5h-6.117l10.919,25.273-.312.876c-1.085,3.009-2.319,4.44-4.786,4.44a9.382,9.382,0,0,1-3.7-1.135l-1.628,4.194a11.677,11.677,0,0,0,6.167,1.875c4.145,0,7.844-3.01,10.114-9.374l9.325-26.148Z" transform="translate(-875.487 -1070.963)" fill="#171716"/>
+					  <path id="Path_2" data-name="Path 2" d="M879.972,1064.53c-1.677,0-2.615-1.381-2.615-3.651v-13.519h5.921v-4.588h-6.019v-7.6h-5.427v3.651c0,2.96-.987,3.947-3.947,3.947h-1.135v4.588h4.44v15.295a6.784,6.784,0,0,0,6.907,6.956c2.96,0,4.737-.838,7.154-2.22l-1.727-4.194c-1.479.789-2.417,1.332-3.552,1.332" transform="translate(-767.318 -1030.685)" fill="#171716"/>
+					  <g id="Group_1-2" data-name="Group 1" transform="translate(87.713)">
+						<path id="Path_3" data-name="Path 3" d="M796.862,1006.884a3.947,3.947,0,1,0,3.947,3.947,3.959,3.959,0,0,0-3.947-3.947" transform="translate(-792.915 -1006.884)" fill="#171716"/>
+						<rect id="Rectangle_1" data-name="Rectangle 1" width="6.167" height="26.149" transform="translate(0.864 12.087)" fill="#171716"/>
+					  </g>
+					  <path id="Path_4" data-name="Path 4" d="M640.994,1090.047l-4.292-.543c-2.368-.3-3.6-.888-3.6-2.862,0-1.727,1.776-3.009,4.391-3.009,2.714,0,4.835.69,8.831,1.825l1.48-4.934a40.726,40.726,0,0,0-10.213-1.825c-6.414,0-10.41,3.453-10.41,8.436,0,4.49,2.664,6.66,7.549,7.3l4.144.543c2.812.345,3.749,1.283,3.749,3.306,0,1.431-1.776,3.009-4.39,3.009-2.714,0-5.329-.987-9.819-2.91l-1.974,4.934c3.454,1.479,7.6,2.911,11.693,2.911,6.414,0,10.41-3.454,10.41-8.437,0-4.49-2.417-7.105-7.549-7.746" transform="translate(-565.146 -1067.303)" fill="#171716"/>
+					  <path id="Path_5" data-name="Path 5" d="M451.163,1089.6a7.6,7.6,0,0,1,7.481-5.97c3.471,0,5.788,2.02,6.686,5.97Zm7.481-10.9c-7.6,0-13.272,6.167-13.272,13.765s5.674,13.764,13.272,13.764c4.589,0,8.338-1.776,11.791-3.4l-1.974-4.884c-4.736,2.072-6.611,3.354-9.818,3.354-4.226,0-7.263-3.072-7.77-7.5h20.054c.494-8.289-4.243-15.1-12.285-15.1" transform="translate(-412.814 -1067.3)" fill="#171716"/>
+					  <path id="Path_6" data-name="Path 6" d="M255.663,1042.8H246.88v-12.334h8.585c4.885,0,7.746,1.677,7.746,5.822,0,4.835-2.812,6.513-7.549,6.513m-8.782-27.876h8.634c3.8,0,6.217,1.727,6.217,5.28,0,3.9-2.812,5.476-6.562,5.476H246.88Zm14.6,12.729v-.148a8,8,0,0,0,6.66-8.041c0-6.365-4.637-9.474-12.531-9.474H240.22v37.743h15.245c8.19,0,14.16-3.306,14.16-11,0-4.885-3.4-8.289-8.141-9.078" transform="translate(-240.22 -1009.497)" fill="#171716"/>
+					</g>
+				  </g>
+				  <g id="Calque_9" data-name="Calque 9" transform="translate(249.707 130)">
+					<path id="Path_7" data-name="Path 7" d="M355.545,361.74H331.74a31.727,31.727,0,0,0-27.493,15.87l0,0v.006A31.593,31.593,0,0,0,300,393.48V360.153h.04A31.741,31.741,0,0,1,331.74,330h23.805a15.87,15.87,0,1,1,0,31.74Z" transform="translate(-300 -298.26)" fill="url(#linear-gradient)" style="mix-blend-mode: multiply;isolation: isolate"/>
+					<path id="Path_8" data-name="Path 8" d="M355.545,645.87H331.74A31.726,31.726,0,0,1,304.247,630a31.747,31.747,0,0,0,27.493,47.61h23.805a15.87,15.87,0,1,0,0-31.74Z" transform="translate(-300 -550.649)" fill="url(#linear-gradient-2)" style="mix-blend-mode: multiply;isolation: isolate"/>
+					<path id="Path_9" data-name="Path 9" d="M665.87,361.74h23.805a31.727,31.727,0,0,0,27.493-15.87l0,0v-.006A31.592,31.592,0,0,0,721.415,330v33.327h-.039a31.741,31.741,0,0,1-31.7,30.153H665.87a15.87,15.87,0,0,1,0-31.74Z" transform="translate(-594.455 -298.26)" fill="url(#linear-gradient-3)" style="mix-blend-mode: multiply;isolation: isolate"/>
+					<path id="Path_10" data-name="Path 10" d="M665.87,161.74h23.805a31.726,31.726,0,0,1,27.493,15.87A31.747,31.747,0,0,0,689.675,130H665.87a15.87,15.87,0,0,0,0,31.74Z" transform="translate(-594.455 -130)" fill="url(#linear-gradient-4)" style="mix-blend-mode: multiply;isolation: isolate"/>
+				  </g>
+				</g>
+			  </svg>
+		</div>
+
+        <div class="container" style="display:none;" id="welcome-page">
+            <div class="row justify-content-center form-bg-image">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="border-0 rounded border-light p-4 p-lg-5 w-100 mh-736">
+			<svg class="Tracciato_460" viewBox="120.967 580 180 90">
+				<path id="Tracciato_460" d="M 300.9668579101562 625 L 300.9668579101562 669.9999389648438 L 120.9670028686523 669.9999389648438 L 120.9670028686523 579.9999389648438 L 255.9669036865234 579.9999389648438 C 255.9669036865234 604.8534545898438 276.1148071289062 625 300.9668579101562 625 Z">
+				</path>
+			</svg>
+			<svg class="Ellisse_37">
+				<ellipse id="Ellisse_37" rx="90" ry="90" cx="90" cy="90">
+				</ellipse>
+			</svg>
+			<div id="Welcome_to">
+				<span>Welcome to</span>
+			</div>
+			<div id="Raggruppa_146">
+				<div id="Calque_7_kl">
+					<div id="Raggruppa_2_km">
+					<svg class="Tracciato_1_kn" viewBox="995.323 1083.05 40.43 55.028">
+						<path id="Tracciato_1_kn" d="M 1026.19873046875 1083.050048828125 L 1016.528686523438 1110.16650390625 L 1004.799072265625 1083.050048828125 L 995.322998046875 1083.050048828125 L 1012.237670898438 1122.199462890625 L 1011.754028320312 1123.55615234375 C 1010.072509765625 1128.21728515625 1008.161499023438 1130.434814453125 1004.340698242188 1130.434814453125 C 1002.659545898438 1130.434814453125 1000.978149414062 1129.746337890625 998.609130859375 1128.676513671875 L 996.0872802734375 1135.173828125 C 999.1435546875 1137.083251953125 1002.430053710938 1138.07763671875 1005.639770507812 1138.07763671875 C 1012.059936523438 1138.07763671875 1017.79150390625 1133.414794921875 1021.307495117188 1123.55615234375 L 1035.753051757812 1083.050048828125 L 1026.19873046875 1083.050048828125 Z">
+						</path>
+					</svg>
+					<svg class="Tracciato_2_ko" viewBox="866.749 1035.175 28.661 53.345">
+						<path id="Tracciato_2_ko" d="M 887.2322998046875 1080.648681640625 C 884.6341552734375 1080.648681640625 883.1815185546875 1078.509155273438 883.1815185546875 1074.9931640625 L 883.1815185546875 1054.051879882812 L 892.3531494140625 1054.051879882812 L 892.3531494140625 1046.94482421875 L 883.029541015625 1046.94482421875 L 883.029541015625 1035.175048828125 L 874.621826171875 1035.175048828125 L 874.621826171875 1040.83056640625 C 874.621826171875 1045.415771484375 873.09326171875 1046.94482421875 868.508056640625 1046.94482421875 L 866.7490234375 1046.94482421875 L 866.7490234375 1054.051879882812 L 873.6275634765625 1054.051879882812 L 873.6275634765625 1077.744506835938 C 873.6275634765625 1083.628784179688 877.984375 1088.52001953125 884.327880859375 1088.52001953125 C 888.9134521484375 1088.52001953125 891.6651611328125 1087.221313476562 895.40966796875 1085.081420898438 L 892.7342529296875 1078.585205078125 C 890.4425048828125 1079.807983398438 888.9893798828125 1080.648681640625 887.2322998046875 1080.648681640625">
+						</path>
+					</svg>
+					<div id="Raggruppa_1_kp">
+						<svg class="Tracciato_3_kq" viewBox="792.915 1006.884 12.228 12.228">
+							<path id="Tracciato_3_kq" d="M 799.02880859375 1006.883972167969 C 795.66650390625 1006.883972167969 792.914794921875 1009.635681152344 792.914794921875 1012.997863769531 C 792.914794921875 1016.360290527344 795.66650390625 1019.112121582031 799.02880859375 1019.112121582031 C 802.391357421875 1019.112121582031 805.1429443359375 1016.360290527344 805.1429443359375 1012.997863769531 C 805.1429443359375 1009.635681152344 802.391357421875 1006.883972167969 799.02880859375 1006.883972167969">
+							</path>
+						</svg>
+						<svg class="Rettangolo_1_kr">
+							<rect id="Rettangolo_1_kr" rx="0" ry="0" x="0" y="0" width="9.553" height="40.506">
+							</rect>
+						</svg>
+					</div>
+						<svg class="Tracciato_4_ks" viewBox="626.439 1078.7 34.24 42.646">
+							<path id="Tracciato_4_ks" d="M 648.9853515625 1096.277587890625 L 642.3365478515625 1095.43701171875 C 638.668212890625 1094.978515625 636.7572021484375 1094.061767578125 636.7572021484375 1091.003662109375 C 636.7572021484375 1088.328369140625 639.5087890625 1086.343017578125 643.5592041015625 1086.343017578125 C 647.7626953125 1086.343017578125 651.048828125 1087.412109375 657.239013671875 1089.170166015625 L 659.531982421875 1081.52783203125 C 655.7115478515625 1080.45751953125 649.29150390625 1078.699951171875 643.7120361328125 1078.699951171875 C 633.77685546875 1078.699951171875 627.585693359375 1084.049560546875 627.585693359375 1091.7685546875 C 627.585693359375 1098.72314453125 631.7122802734375 1102.085693359375 639.2791748046875 1103.079833984375 L 645.69921875 1103.920654296875 C 650.0557861328125 1104.455078125 651.50732421875 1105.90771484375 651.50732421875 1109.041259765625 C 651.50732421875 1111.257568359375 648.75537109375 1113.70263671875 644.706298828125 1113.70263671875 C 640.501953125 1113.70263671875 636.4512939453125 1112.173828125 629.4964599609375 1109.194091796875 L 626.43896484375 1116.836669921875 C 631.789794921875 1119.12841796875 638.2083740234375 1121.345947265625 644.5523681640625 1121.345947265625 C 654.48876953125 1121.345947265625 660.6787109375 1115.995849609375 660.6787109375 1108.277099609375 C 660.6787109375 1101.3212890625 656.9344482421875 1097.2705078125 648.9853515625 1096.277587890625">
+							</path>
+						</svg>
+						<svg class="Tracciato_5_kt" viewBox="445.372 1078.697 39.644 42.646">
+							<path id="Tracciato_5_kt" d="M 454.3433227539062 1095.58740234375 C 455.834716796875 1090.02685546875 460.170166015625 1086.33984375 465.9313354492188 1086.33984375 C 471.3075561523438 1086.33984375 474.897216796875 1089.468627929688 476.2883911132812 1095.58740234375 L 454.3433227539062 1095.58740234375 Z M 465.9313354492188 1078.696899414062 C 454.1614379882812 1078.696899414062 445.3720092773438 1088.250854492188 445.3720092773438 1100.020629882812 C 445.3720092773438 1111.790405273438 454.1614379882812 1121.3427734375 465.9313354492188 1121.3427734375 C 473.0394897460938 1121.3427734375 478.8475952148438 1118.591064453125 484.1971435546875 1116.069580078125 L 481.1396484375 1108.504272460938 C 473.8026733398438 1111.713989257812 470.8987426757812 1113.699829101562 465.9313354492188 1113.699829101562 C 459.3855590820312 1113.699829101562 454.6802978515625 1108.94140625 453.895751953125 1102.083984375 L 476.9365844726562 1102.083984375 L 484.8094482421875 1102.083984375 L 484.9614868164062 1102.083984375 C 485.7261962890625 1089.24365234375 478.3892211914062 1078.696899414062 465.9313354492188 1078.696899414062">
+							</path>
+						</svg>
+						<svg class="Tracciato_6_ku" viewBox="240.22 1009.99 45.55 58.468">
+							<path id="Tracciato_6_ku" d="M 264.1417236328125 1060.81494140625 L 250.5371856689453 1060.81494140625 L 250.5371856689453 1041.708251953125 L 263.835693359375 1041.708251953125 C 271.4024047851562 1041.708251953125 275.835205078125 1044.306396484375 275.835205078125 1050.726318359375 C 275.835205078125 1058.215576171875 271.4785766601562 1060.81494140625 264.1417236328125 1060.81494140625 M 250.5371856689453 1017.632751464844 L 263.9119262695312 1017.632751464844 C 269.7972412109375 1017.632751464844 273.5419311523438 1020.308166503906 273.5419311523438 1025.81201171875 C 273.5419311523438 1031.848388671875 269.1851196289062 1034.294189453125 263.3771362304688 1034.294189453125 L 250.5371856689453 1034.294189453125 L 250.5371856689453 1017.632751464844 Z M 273.15966796875 1037.351806640625 L 273.15966796875 1037.121826171875 C 279.1215209960938 1035.82275390625 283.476806640625 1031.3134765625 283.476806640625 1024.665283203125 C 283.476806640625 1014.804992675781 276.2936401367188 1009.989929199219 264.0655517578125 1009.989929199219 L 240.2199859619141 1009.989929199219 L 240.2199859619141 1068.45751953125 L 263.835693359375 1068.45751953125 C 276.52197265625 1068.45751953125 285.7700805664062 1063.336669921875 285.7700805664062 1051.41455078125 C 285.7700805664062 1043.84765625 280.4965209960938 1038.574462890625 273.15966796875 1037.351806640625">
+							</path>
+						</svg>
+					</div>
+				</div>
+			</div>
+
+			<div id="We_offer_you_innovative_inclus">
+				<h2>A platform to build<br/>communities and get <br/>the best of the city</h2>
+			</div>
+
+ 				<div class="welcome-buttons">
+                                	<a href="{% url 'choice_account' %}" class="getstarted btn-primary -800 small">Sign Up</a><br/><br/>
+                                	<a href="{% url 'login' %}" class="getstarted btn-primary -800 small">Sign In</a>
+				</div>
+
+			<svg class="Rettangolo_66">
+				<rect id="Rettangolo_66" rx="0" ry="0" x="0" y="0" width="140" height="140">
+				</rect>
+			</svg>
+			<svg class="Ellisse_42">
+				<ellipse id="Ellisse_42" rx="70" ry="70" cx="70" cy="70">
+				</ellipse>
+			</svg>
+			<svg class="Ellisse_41">
+				<ellipse id="Ellisse_41" rx="70" ry="70" cx="70" cy="70">
+				</ellipse>
+			</svg>
+                           </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+  const logger_on = false;
+  // Initialize deferredPrompt for use later to show browser install prompt.
+  let deferredInstallPrompt;
+  // Preinitialize is_besity_installed to null
+  var is_besity_installed;
+
+  var preloader_timeout;
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+	//if (logger_on) console.log(besityWorkerName + ": preparing before install...");
+	// Prevent the mini-infobar from appearing on mobile
+	event.preventDefault();
+	// Stash the event so it can be triggered later (note that the deferredInstallPrompt must be in the script space of the caller)
+	deferredInstallPrompt = event;
+  });
+
+  function hookPreloader() {
+		preloader_timeout = setTimeout(showPage, 1600);
+  }
+
+  function showPage() {
+	document.getElementById("loader").style.display = "none";
+	document.getElementById("loader-div").style.display = "none";
+	document.getElementById("welcome-page").style.display = "inline-block";
+  }
+
+  function installBesity() {
+	deferredInstallPrompt.prompt();
+  }
+
+  function isPWAServiceWorkerInstalled() {
+	return ("serviceWorker" in navigator);
+  }
+
+  function isBrowser(broswer_id) {
+	let userAgentString = navigator.userAgent;
+    if (logger_on) console.log("User Agent: " + userAgentString);
+    // Detect Chrome
+    return userAgentString.indexOf(broswer_id) > -1;
+  }
+
+  function isBrowserPWACompatible() {
+	let userAgentString = navigator.userAgent;
+    if (logger_on) console.log("User Agent: " + userAgentString);
+    // Detect Chrome
+    return isBrowser("Chrome") && !isBrowser('iPhone') && !isBrowser('iPad') && !isBrowser('Android');
+  }
+
+  function getPWADisplayMode() {
+	const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+	if (document.referrer.startsWith('android-app://')) {
+		return 'twa';
+	} else if (navigator.standalone || isStandalone) {
+		return 'standalone';
+	}
+	return 'browser';
+  }
+
+  async function isBesityInstalled() {
+	try {
+		//if we can succesfully invoke in this scope the getInstalledRelatedApps() method, then the app is installed
+		//check if browser version supports the api
+		if ('getInstalledRelatedApps' in window.navigator) {
+			const relatedApps = await navigator.getInstalledRelatedApps();
+			const nativeApp = relatedApps.find(app => app.id === 'app.besity.app');
+			if (logger_on) console.log('Found the following relatedApps...');
+			if (logger_on) console.log(relatedApps);
+			relatedApps.forEach((app) => {
+				//if your PWA exists in the array it is installed
+				if (app.platform == "besity") {
+					return true;
+				}
+			});
+
+			if (logger_on) console.log('Besity is not present in the list of apps...');
+
+			return false;
+		}
+		//if we can't invoke the method, then the app is not installed
+		//this is the case for browsers that don't support the method
+		else {
+
+			if (logger_on) console.log('Your browser does not support getInstalledRelatedApps() method');
+
+			return false;
+		}
+	} catch (e) {
+		//if we can't invoke the method, then the app is not installed
+
+		if (logger_on) console.log('Your browser failed in executing getInstalledRelatedApps() method');
+
+		return false;
+	}
+  }
+
+function waitForCondition (variable) {
+	function waitFor(result) {
+		if (logger_on) console.log("Waiting for " + variable + " to be defined...");
+		if (logger_on) console.log("Current value: " + result);
+		if (result !== undefined) {
+			return result;
+		}
+	return new Promise((resolve) => setTimeout(resolve, 100))
+	.then(() => Promise.resolve(window[variable]))
+	.then((res) => waitFor(res));
+	}
+	return waitFor();
+}
+
+function checkBesityInstalled(final_besity_installed_verdict) {
+
+	if (logger_on) console.log("Checking if Besity is installed...");
+
+	if (isPWAServiceWorkerInstalled() && isBrowserPWACompatible() && (getPWADisplayMode() != "standalone")) {
+		if (logger_on) console.log("PWA capable browser detected. Checking fo Besity.app presence...");
+
+		// If the browser is PWA compatible and the deferredInstallPrompt variable has not been initialized
+		// we can assume that Besity is installed
+		if (logger_on) console.log("Besity installed value: " + final_besity_installed_verdict);
+
+		if (logger_on) console.log("Deferred install prompt: " + deferredInstallPrompt);
+
+		if (final_besity_installed_verdict || (deferredInstallPrompt == undefined)) {
+
+			if (logger_on) console.log("Besity is already installed...");
+
+			return true;
+		}
+		// In any other case we have a PWA compatible browser so we show the installation link
+		else {
+
+			if (logger_on) console.log("Besity is not installed...");
+
+			const installation_link = document.getElementById("pwa-install-dialogue");
+			if (installation_link) {
+				installation_link.style.visibility = "visible";
+			}
+
+			return false;
+		}
+	}
+}
+
+//Activate different homepage functions
+hookPreloader();
+
+// check if Besity is installed. The check is performed asynchronously.
+window.is_besity_installed = isBesityInstalled();
+
+//we wait for the result of the check and we activate the installation link if the PWA is not installed
+waitForCondition('is_besity_installed').then((res) => checkBesityInstalled(res));
+
+</script>
+
+<script>
+
+var AddToHomeScreen = function (settings = {}) {
+  // Container styles
+  var backgroundColor = settings.backgroundColor || "#f9f9f9";
+  var padding = settings.padding || "11px";
+  var shadowColor = settings.shadowColor || "#343434";
+  var shadowSize = settings.shadowSize || "10px";
+  // Content styles
+  var fontFamily = settings.fontFamily || "-apple-system, sans-serif";
+  var color = settings.color || "#343434";
+  var fontSize = settings.fontSize || "0.9rem";
+  // Content
+  var brandName = settings.brandName || "Besity.app";
+  var logoImage =
+    settings.logoImage ||
+    `<img src="/static/assets/img/favicon/apple-touch-icon.png" style="mix-blend-mode: multiply; width: 26px">`;
+  var htmlContent =
+    settings.htmlContent ||
+    `Install ${brandName} on your iOS device: <strong>tap share</strong>
+	<?xml version="1.0" encoding="UTF-8"?>
+	<svg width="24" height="24" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<title>ios_tap_share</title>
+		<g id="Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<g id="ios_tap_share" fill="#212121" fill-rule="nonzero">
+				<path d="M37.75,20.25 C38.6681734,20.25 39.4211923,20.9571103 39.4941988,21.8564728 L39.5,22 L39.5,36.25 C39.5,39.3517853 37.0439828,41.879937 33.9705557,41.9958479 L33.75,42 L14.25,42 C11.1482147,42 8.62006299,39.5439828 8.50415208,36.4705557 L8.5,36.25 L8.5,22 C8.5,21.0335017 9.28350169,20.25 10.25,20.25 C11.1681734,20.25 11.9211923,20.9571103 11.9941988,21.8564728 L12,22 L12,36.25 C12,37.440864 12.9251616,38.4156449 14.0959512,38.4948092 L14.25,38.5 L33.75,38.5 C34.940864,38.5 35.9156449,37.5748384 35.9948092,36.4040488 L36,36.25 L36,22 C36,21.0335017 36.7835017,20.25 37.75,20.25 Z M23.4989075,6.26787884 L23.6477793,6.25297693 L23.6477793,6.25297693 L23.8225053,6.25140103 L23.8225053,6.25140103 L23.9770074,6.26441014 L23.9770074,6.26441014 L24.1549097,6.29667263 L24.1549097,6.29667263 L24.223898,6.31492315 L24.223898,6.31492315 C24.4192207,6.36884271 24.6069182,6.4577966 24.7773762,6.58126437 L24.8968901,6.67628678 L24.8968901,6.67628678 L24.989825,6.76256313 L32.7679996,14.5407377 C33.4514171,15.2241552 33.4514171,16.3321939 32.7679996,17.0156115 C32.1247831,17.6588279 31.1054316,17.6966642 30.4179639,17.1291203 L30.2931259,17.0156115 L25.5,12.222 L25.5,31.5 C25.5,32.4181734 24.7928897,33.1711923 23.8935272,33.2441988 L23.75,33.25 C22.8318266,33.25 22.0788077,32.5428897 22.0058012,31.6435272 L22,31.5 L22,12.226 L17.2116504,17.0156115 C16.5684339,17.6588279 15.5490824,17.6966642 14.8616148,17.1291203 L14.7367767,17.0156115 C14.0935602,16.372395 14.055724,15.3530435 14.6232679,14.6655758 L14.7367767,14.5407377 L22.488804,6.78678454 C22.5446792,6.72871358 22.6045271,6.67449255 22.6679103,6.62455868 L22.7812362,6.54379243 L22.7812362,6.54379243 C22.8189499,6.51724 22.858413,6.49312256 22.8988638,6.47056335 L22.9176605,6.46138558 C23.0947495,6.36422067 23.2909216,6.29776289 23.4989075,6.26787884 Z" id="🎨-Color">
+				</path>
+			</g>
+		</g>
+	</svg>
+	and <strong>Add to Home Screen</strong>&nbsp;
+	<svg width="20" height="20" viewBox="0 0 73 73" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<g id="Regular-S">
+			<path id="Path" fill="#000000" stroke="none" d="M 12.726807 72.390625 L 58.967041 72.390625 C 63.133667 72.390625 66.25061 71.365234 68.317627 69.314453 C 70.384644 67.263672 71.418213 64.1875 71.418213 60.085938 L 71.418213 13.503906 C 71.418213 9.402344 70.384644 6.326172 68.317627 4.275391 C 66.25061 2.224609 63.133667 1.199219 58.967041 1.199219 L 12.726807 1.199219 C 8.592651 1.199219 5.484009 2.224609 3.400635 4.275391 C 1.317261 6.326172 0.275635 9.402344 0.275635 13.503906 L 0.275635 60.085938 C 0.275635 64.1875 1.317261 67.263672 3.400635 69.314453 C 5.484009 71.365234 8.592651 72.390625 12.726807 72.390625 Z M 12.824463 65.310547 C 11.06665 65.310547 9.707642 64.84668 8.747314 63.918945 C 7.786987 62.991211 7.306885 61.599609 7.306885 59.744141 L 7.306885 13.845703 C 7.306885 12.022827 7.786987 10.639282 8.747314 9.695313 C 9.707642 8.751343 11.06665 8.279297 12.824463 8.279297 L 58.869385 8.279297 C 60.627197 8.279297 61.986206 8.751343 62.946533 9.695313 C 63.90686 10.639282 64.386963 12.022827 64.386963 13.845703 L 64.386963 59.744141 C 64.386963 61.599609 63.90686 62.991211 62.946533 63.918945 C 61.986206 64.84668 60.627197 65.310547 58.869385 65.310547 Z M 17.902588 36.746094 C 17.902588 37.820313 18.244385 38.69104 18.927979 39.358398 C 19.611572 40.025757 20.523071 40.359375 21.662354 40.359375 L 32.209229 40.359375 L 32.209229 50.955078 C 32.209229 52.029297 32.53479 52.916382 33.185791 53.616211 C 33.836792 54.31604 34.715698 54.666016 35.82251 54.666016 C 36.896729 54.666016 37.783813 54.31604 38.483643 53.616211 C 39.183472 52.916382 39.533447 52.029297 39.533447 50.955078 L 39.533447 40.359375 L 50.080322 40.359375 C 51.187134 40.359375 52.082275 40.025757 52.765869 39.358398 C 53.449463 38.69104 53.79126 37.820313 53.79126 36.746094 C 53.79126 35.639282 53.449463 34.744141 52.765869 34.060547 C 52.082275 33.376953 51.187134 33.035156 50.080322 33.035156 L 39.533447 33.035156 L 39.533447 22.488281 C 39.533447 21.38147 39.183472 20.478149 38.483643 19.77832 C 37.783813 19.078491 36.896729 18.728516 35.82251 18.728516 C 34.715698 18.728516 33.836792 19.078491 33.185791 19.77832 C 32.53479 20.478149 32.209229 21.38147 32.209229 22.488281 L 32.209229 33.035156 L 21.662354 33.035156 C 20.523071 33.035156 19.611572 33.376953 18.927979 34.060547 C 18.244385 34.744141 17.902588 35.639282 17.902588 36.746094 Z"/>
+		</g>
+	</svg>
+	`;
+  // Define iOS User-Agent variable
+  var iOS = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+  // Define standalone mode variable
+  var standalone =
+    "standalone" in window.navigator && window.navigator.standalone;
+  // Check localStorage before render a2hs container
+  if (iOS && !standalone && !window.localStorage.a2hs_message) {
+    // Define container variable
+    var div = document.createElement("div");
+    // Define style variable
+    var style = document.createElement("style");
+    // Create styles
+    style.innerHTML = `
+      .a2hs__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        box-sizing: border-box;
+        box-shadow: ${shadowColor} 0 0 ${shadowSize};
+        background-color: ${backgroundColor};
+        padding: ${padding};
+        width: 100%;
+        bottom: 0;
+        right: 0;
+        left: 0;
+		z-index: 9999;
+      }
+      .a2hs__container .a2hs__logo {
+        padding: ${padding};
+      }
+      .a2hs__container .a2hs__text {
+        font-family: ${fontFamily};
+        font-size: ${fontSize};
+        color: ${color};
+      }`;
+    // Create message
+    div.innerHTML = `<div class="a2hs__logo">${logoImage}</div>
+      <div class="a2hs__text">${htmlContent}</div>`;
+    // Add class to container
+    div.setAttribute("class", "a2hs__container");
+    // Add onClick function
+    div.onclick = function (event) {
+      // Prevent default click
+      event.preventDefault();
+      // Hide a2hs_message
+      window.localStorage.setItem("a2hs_message", "hide");
+      // Remove a2hs container from DOM
+      document.querySelector(".a2hs__container").remove();
+    };
+    // Render elements
+    document.head.appendChild(style);
+    document.body.appendChild(div);
+  }
+};
+
+console.log("Add home screen script loaded");
+AddToHomeScreen();
+
+</script>
+
+{% endblock javascripts %}

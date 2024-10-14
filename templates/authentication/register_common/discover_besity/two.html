@@ -1,0 +1,56 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% block title %} Discover Besity {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center form-bg-image" >
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                        <div class="text-center text-md-center mb-4 mt-md-0">
+
+                            <h1 class="mt-4 mb-0 h3">
+                                Discover Besity
+                            </h1>
+                        </div>
+                        <div class="mt-4" style="text-align: center;">
+                            <div class="d-grid">
+                                <div class="default fact one">
+                                    <h6>Fact two...</h6>
+                                    <p class="text-center">
+                                        <br>
+                                        <br>
+                                    </p>
+                                    <!--ul>
+                                        <li class="filter" data-filtre="two">Next</li>
+                                    </!--ul-->
+                                </div>
+
+                                <br />
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="{% url 'discover_besity' 'three' %}" class="btn-primary -800 small">Next</a>
+                        </div>
+
+                        <br />
+                        <div class="d-flex justify-content-center align-items-center mt-4">
+                            <span class="fw-normal">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

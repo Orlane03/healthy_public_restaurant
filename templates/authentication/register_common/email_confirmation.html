@@ -1,0 +1,58 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% block title %} Sign Up - Email Verification {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center form-bg-image" >
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                    <div class="text-center text-md-center mb-4 mt-md-0">
+                        <a title="Back to Besity" href="{% url 'login' %}" >
+                            <img class="animate-up-2" width="40" src="/static/assets/img/brand/logo.png">
+                        </a>
+                        <h1 class="mt-4 mb-0 h3">
+                            Please verify your email
+                        </h1>
+                    </div>
+                    <div class="mt-2">
+                        <div class="d-grid">
+                            <form method="post" action="{% url 'email_confirmation' %}" class="mt-4 text-center">
+                                {% csrf_token %}
+                                <p>
+                                    You're almost there! We sent an email to <strong class="not-translate">{{ email }}</strong>
+                                </p>
+                                <p>
+                                    Just click on the link in that email to complete your signup. If you don't see it, you may need to <strong>check your spam</strong> folder.
+                                </p>
+                                <p class="small">
+                                    <a href="https://besity.app/support-request" class="highlight-link">Still can't find the email?</a> | <a href="/login" name="" class="highlight-link">Back to Login</a>
+                                </p>
+                                <div class="form-group mb-1">
+                                        <div class="input-group">
+                                            <input name="email" type="hidden" value="{{ email }}">
+                                        </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <button type="submit" name="" class="btn-primary -800 small"  style="width:fit-content">Resend Email</button>
+                                </div>
+                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'app/includes/messages.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

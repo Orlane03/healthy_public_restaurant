@@ -1,0 +1,82 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% block title %} Sign Up - Discover More {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="container-fluid bg-peach fade-in" style="height:100%; background-position: top center; background-size: cover; background-blend-mode: multiply; background-image: url('/static/assets/img/background_shapes/confetti-profile-percentage.gif')">
+            <div class="row m-0 p-6 vh-100">
+                <div class="col-lg-12 m-0 p-0">
+                    <div class="text-center text-md-center mb-4 mt-md-0">
+                        <h1 class="mt-4 mb-0" style="color:white">
+                            Besity
+                        </h1>
+                        <h2 class="mt-4 mb-0" style="color:white">Your profile is at</h2>
+                    </div>
+                    <div style="width: 100%; max-width: 500px;margin-left:auto; margin-right:auto;margin-bottom: 25px; mix-blend-mode: color-dodge">
+                        <div class="circle-wrap">
+
+                        <div class="circle">
+
+                        <div class="mask full">
+
+                            <div class="fill"></div>
+
+                        </div>
+
+                        <div class="mask half">
+
+                            <div class="fill"></div>
+
+                        </div>
+
+                        <div class="inside-circle"> 70% </div>
+
+                        </div>
+
+                        </div>
+                        </div>
+            <div class="mt-4" style="text-align: center;">
+                <div class="d-grid">
+                    <div class="default fact one">
+                        <p class="text-center" style="color:white">
+                            Why not 100% ?
+                        </p>
+            <a href="{% url 'display_profile' %}" title="Read more" style="color:white">Read More</a>
+                    </div>
+                </div>
+            </div><br/>
+            <div style="text-align: center;">
+                <a href="{% url 'home' request.user.individual.municipality_slug %}">Next</a>
+            </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript">
+    $("#yes,#no").click(function() {
+        $('#question_form').submit()
+    });
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('.chart').easyPieChart({
+          size: 200,
+          barColor: "#36e617",
+          scaleLength: 0,
+          lineWidth: 18,
+          trackColor: "#525151",
+          lineCap: "circle",
+          animate: 2500,
+        });
+      });
+</script>
+{% endblock javascripts %}

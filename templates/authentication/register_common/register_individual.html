@@ -1,0 +1,106 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Sign Up - Individual Registration {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link type="text/css" href="/static/assets/css/municipality_details.css?version=289" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="container-fluid" style="min-height: 1240px; background-position: bottom center;">
+    <div class="row justify-content-center form-bg-image">
+        <div class="col-12 fw-418 p-5 align-items-center justify-content-center">
+            <div class="border-0 rounded border-light">
+                <div class="text-center">
+                    <a title="Back to Besity" href="{% url 'login' %}" >
+                        <img class="animate-up-2" width="40" src="/static/assets/img/brand/logo.png">
+                    </a>
+                </div>
+                <div class="text-center pt-4 pb-2">
+                    <h2>
+                        Sign Up
+                    </h2>
+                </div>
+                <form method="post" action="" class="mt-4" novalidate>
+
+                    {% csrf_token %}
+
+                    <div class="form-group mb-4">
+                        <label for="id_language">Language of preference</label>
+                        <div class="input-group">
+                            {{ form.language }}
+                        </div>
+                        <span class="text-error">{{ form.language.errors }}</span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="id_full_name">Full name</label>
+                        <div class="input-group">
+                            {{ form.full_name }}
+                        </div>
+                        <span class="small text-danger">{{ form.full_name.errors|striptags }}</span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="id_birth_date">Date of birth</label>
+                        <div class="input-group">
+                            {{ form.birth_date }}
+                        </div>
+                        <span class="small text-danger">{{ form.birth_date.errors|striptags }}</span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="id_gender">Gender</label>
+                        <div class="input-group">
+                            {{ form.gender }}
+                        </div>
+                        <span class="small text-danger">{{ form.gender.errors|striptags }}</span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="id_nationality">Nationality</label>
+                        <div class="input-group">
+                            {{ form.nationality }}
+                        </div>
+                        <span class="small text-danger">{{ form.nationality.errors|striptags }}</span>
+                    </div>
+
+                    <div id="living_div">
+                        <div class="form-group mb-4">
+                            <label for="id_lives_in">Select your city</label>
+                            <div class="input-group">
+                                {% render_field form.lives_in class="form-control" %}
+                            </div>
+                            <span class="small text-danger">{{ form.lives_in.errors|striptags }}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <div class="input-group">
+                            {% render_field form.move_to class="form-control" %}
+                        </div>
+                        <span class="small text-danger">{{ form.move_to.errors|striptags }}</span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" name="register" class="btn-primary -800">Next</button>
+                    </div>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'app/includes/messages.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

@@ -1,0 +1,163 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% block title %} Sign Up - Code Verification {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center form-bg-image" >
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                    <div class="text-center text-md-center mb-4 mt-md-0">
+                        <a title="Back to Besity" href="{% url 'login' %}" >
+                            <img class="animate-up-2" width="40" src="/static/assets/img/brand/logo.png">
+                        </a>
+                        <h1 class="mt-4 mb-0 h3">
+                            Enter verification code
+                        </h1>
+                    </div>
+                    <form method="post" action="{% url 'verify_phone' %}" class="mt-4 text-center" id="phone_form">
+                        <p class="small">Experiencing issues? Contact <a class="highlight-link" href="https://www.besity.app/support">Besity Support</a></p>
+                        {% csrf_token %}
+                        <div class="form-group mb-1" style="text-align: center; margin-top: 20px">
+                            <div class="input-group input-group-sm align-items-center justify-content-center">
+                                <input maxlength="1" style="max-width: 17%; text-align: center"
+                                    class="form-control input-group-prepend" id="code_one" name="code_one" type="text" value="" pattern="\d*" placeholder="">
+                                <input maxlength="1" style="max-width: 17%; text-align: center"
+                                        class="form-control input-group-addon" id="code_two" name="code_two" type="text" value="" pattern="\d*" placeholder="">
+                                <input maxlength="1" style="max-width: 17%; text-align: center"
+                                        class="form-control input-group-addon" id="code_three" name="code_three" type="text" value="" pattern="\d*" placeholder="">
+                                <input maxlength="1" style="max-width: 17%; text-align: center"
+                                        class="form-control input-group-addon" id="code_four" name="code_four" type="text" value="" pattern="\d*" placeholder="">
+                                <input maxlength="1" style="max-width: 17%; text-align: center"
+                                        class="form-control input-group-addon" id="code_five" name="code_five" type="text" value="" pattern="\d*" placeholder="">
+                                <input maxlength="1" style="max-width: 17%; text-align: center"
+                                        class="form-control input-group-addon" id="code_six" name="code_six" type="text" value="" pattern="\d*" placeholder="" onkeypress="setTimeout(myFunction, 1000);">
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                                <div class="input-group">
+                                    <input class="form-control" name="phone_number" type="hidden" value="{{ phone_number }}" placeholder="">
+                                </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px">
+                            <button type="submit" name="" class="btn-primary -800">Verify phone number</button>
+                        </div>
+                    </form>
+
+                    <form method="post" action="{% url 'resend_code' %}" class="mt-4 text-center">
+                        {% csrf_token %}
+                        <div class="form-group mb-1">
+                                <div class="input-group">
+                                    <input class="form-control" name="phone_number" type="hidden" value="{{ phone_number }}" placeholder="">
+                                </div>
+                        </div>
+                        {% if number_attempt == 3 %}
+                        <div style="text-align: center; margin-top: 15px">
+                            <button type="button" name="send_code" class="btn"><a href="{% url 'send_code' %}?reset=1">Change phone number</a></button>
+                        </div>
+                        {% else %}
+                        <div style="text-align: center; margin-top: 15px">
+                            <button type="submit" name="" class="btn">Resend code</button>
+                            <button type="button" name="send_code" class="btn"><a href="{% url 'send_code' %}?reset=1">Change phone number</a></button>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'app/includes/messages.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#code_one').focus();
+    $('#code_one').keyup(function() {
+        if ($("#code_one").val().length == 1) {
+            $('#code_two').focus();
+        }
+        //else if ($("#code_one").val().length > 1) {
+        //    $("#phone_form")[0].reset();
+        //    $('#code_one').focus();
+        //}
+        else {
+            $('#code_one').focus();
+        }
+    });
+    $('#code_two').keyup(function() {
+        if ($("#code_two").val().length == 1) {
+            $('#code_three').focus();
+        }
+        //else if ($("#code_two").val().length > 1) {
+        //    $("#phone_form")[0].reset();
+        //    $('#code_one').focus();
+        //}
+        else {
+            $('#code_two').focus();
+        }
+    });
+    $('#code_three').keyup(function() {
+        if ($("#code_three").val().length == 1) {
+            $('#code_four').focus();
+        }
+        //else if ($("#code_three").val().length > 1) {
+        //    $("#phone_form")[0].reset();
+        //    $('#code_one').focus();
+        //}
+        else {
+            $('#code_three').focus();
+        }
+    });
+    $('#code_four').keyup(function() {
+        if ($("#code_four").val().length == 1) {
+            $('#code_five').focus();
+        }
+        //else if ($("#code_four").val().length > 1) {
+        //    $("#phone_form")[0].reset();
+        //    $('#code_one').focus();
+        //}
+        else {
+            $('#code_four').focus();
+        }
+    });
+    $('#code_five').keyup(function() {
+        if ($("#code_five").val().length == 1) {
+            $('#code_six').focus();
+        }
+        //else if ($("#code_five").val().length > 1) {
+        //    $("#phone_form")[0].reset();
+        //    $('#code_one').focus();
+        //}
+        else {
+            $('#code_five').focus();
+        }
+    });
+    $('#code_six').keyup(function() {
+        if ($("#code_six").val().length == 1) {
+            $('#phone_form').submit();
+        }
+        //else if ($("#code_six").val().length > 1) {
+        //    $("#phone_form")[0].reset();
+        //    $('#code_one').focus();
+        //}
+        else {
+            $('#code_six').focus();
+        }
+    });
+});
+
+</script>
+
+{% endblock javascripts %}

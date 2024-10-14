@@ -1,0 +1,98 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% block title %} Sign Up - Confidentiality {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="container-fluid m-0 p-0">
+    <div class="row justify-content-center m-0 p-0">
+        <div class="col-12 d-flex justify-content-center m-0 p-0">
+            <img class="upper-shapes" src="/static/assets/img/design/confidentiality-shapes-upper.png">
+            <div class="center-screen text-center fmxw-500 p-5">
+                <div class="mt-4 mb-4">
+                    <h2>
+                        <b>Privacy & Terms</b>
+                    </h2>
+                    <br/>
+                    <div>
+                        <p>
+                            <label for="agree-privacy-policy">
+                                <input class="form-check-input checkbox-round" type="checkbox" value=""
+                                       id="agree-privacy-policy">
+                                I agree to the <a class="highlight-link" href="/static/assets/img/pages/PrivacyPolicy.pdf#toolbar=0"
+                                                  target="__blank" alt="Privacy Policy" title="Privacy Policy">privacy
+                                policy</a> and <a data-bs-target="#modal-terms-of-service"
+                                                  href="/static/assets/img/pages/TermsOfService.pdf#toolbar=0" alt="Terms of Use"
+                                                  title="Terms of Use">terms of use</a>
+                            </label>
+                        </p>
+                        <div class="modal fade" id="modal-privacy-policy" tabindex="-1" role="dialog"
+                             aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Privacy Policy</h3>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe src="/static/assets/img/pages/PrivacyPolicy.pdf#toolbar=0"
+                                        style="width: 100%; height: 100vh">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modal-terms-of-service" tabindex="-1" role="dialog"
+                             aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Terms of Service</h3>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe src="/static/assets/img/pages/TermsOfService.pdf#toolbar=0"
+                                        style="width: 100%; height: 100vh">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="{% url 'register' %}" id="agree-and-continue"
+                               class="btn-primary small mt-1 disabled">Agree and Continue</a>
+                        </div>
+                    </div>
+                </div>
+                <img class="bottom-shapes" src="/static/assets/img/design/confidentiality-shapes-bottom.png">
+            </div>
+        </div>
+    </div>
+    <span class="fw-normal small back-link">
+
+                <a class="highlight-link" value="Previous Page" onClick="javascript:history.go(-1);">Back</a>
+            </span>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+$(document).ready(function () {
+  $('#agree-privacy-policy').click(function () {
+    if ($("#agree-privacy-policy").prop("checked")) {
+        $('#agree-and-continue').removeClass("disabled");
+    } else {
+        $('#agree-and-continue').addClass("disabled");
+    }
+  })
+});
+
+</script>
+{% endblock javascripts %}

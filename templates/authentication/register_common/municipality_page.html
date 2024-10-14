@@ -1,0 +1,71 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% load rules %}
+{% load extras %}
+
+{% block title %} Discover {{municipality.name}} {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+        <div class="container-fluid fade-in vh-100" style="background-color: #FBF6F1;">
+            <div class="card m-0 pt-0" style="background-color: #FBF6F1; border: 0px solid transparent">
+                <div class="col-12 m-0 p-0">
+                    <!--<div class="text-center text-md-center" style="background-color: #FBF6F1;" >
+                        <h1>
+                            Congratulations!
+                        </h1>
+                        <h2 class="mt-4 mb-0" style="color:black">You have joined <b>{{municipality.name}}</b>'s community </h2>
+                    </div>-->
+                    <div class="container-fluid pt-0 border-0" style="background-color: #FBF6F1;" >
+                        <div>
+                            <div class="p-0 vh-100">
+                                <div class="text-center">
+                                    {% if municipality.banner %}
+                                        <div style=" background-size: cover; background-image: url({{ municipality.banner.url }}); background-position: center center; height: 500px">
+                                            {% if municipality.logo %}
+                                                <img class="avatar-xl rounded-circle mx-auto mt-12 mb-4" alt="{{ municipality.name }}" src="{{ municipality.logo.url }}">
+                                            {% else %}
+                                                <img class="avatar-xl rounded-circle mx-auto mt-12 mb-4" alt="{{ municipality.name }}" src="{{ request.user.individual.DEFAULT_AVATAR_PICTURE }}">
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <div class="header default-header-gradient" style="height: 500px">
+                                            {% if municipality.logo %}
+                                                <img class="avatar-xl rounded-circle mx-auto mt-12 mb-4" alt="{{ municipality.name }}" src="{{ municipality.logo.url }}">
+                                            {% else %}
+                                                <img class="avatar-xl rounded-circle mx-auto mt-12 mb-4" alt="{{ municipality.name }}" src="{{ request.user.individual.DEFAULT_AVATAR_PICTURE }}">
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="border-0 p-3 vh-100 mx-auto">
+                                    <div class="text-center mt-7">
+                                        <a href="{% url 'view_community' request.user.individual.municipality_slug %}"><button class="btn-primary m-3">Join the community</button></a>
+                                        <a href="{% url 'home' request.user.individual.municipality_slug %}"><button class="btn-primary m-3">Enter your dashboard</button></a>
+                                    </div>
+                                    <h2 class="mt-2 pt-2">
+                                        <small class="mt-5" style="font-size:0.5em; line-height:0.5;">{{ municipality.presentation|safe }}</small>
+                                    </h2>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+{% include 'app/includes/messages.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript">
+    notyf.success("Welcome to {{municipality.name}}");
+</script>
+{% endblock javascripts %}

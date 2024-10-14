@@ -1,0 +1,87 @@
+{% extends "app/layouts/base-fullscreen.html" %}
+
+{% block title %} Sign UP - Registration {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <section>
+        <div class="container-fluid">
+            <div class="row col-12 h-15">
+                <svg class="upper-shapes-right" xmlns="http://www.w3.org/2000/svg" width="337.116" height="221.116" viewBox="0 0 337.116 221.116">
+                    <path style="position:relative; top:0px;" id="Path_474" data-name="Path 474" d="M130.116,0V260.232L0,130.116Z" transform="translate(0 221.116) rotate(-90)" fill="#5e94c7"/>
+                    <ellipse id="Ellipse_48" data-name="Ellipse 48" cx="92" cy="91" rx="92" ry="91" transform="translate(337.116 182) rotate(180)" fill="#e56d53" style="mix-blend-mode: multiply;isolation: isolate"/>
+                  </svg>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 h-70 align-items-center justify-content-center center-screen">
+                    <div class="p-5"  style="min-width: 25%">
+                        <div class="text-center text-md-center mb-4 mt-md-0" style="z-index:999;">
+                            <h1 class="mb-0 h3" >
+                                Sign Up
+                            </h1>
+                        </div>
+                        <form method="post" action="" class="mt-4">
+                            {% csrf_token %}
+                            <!-- Form -->
+                            <div class="form-group mb-4">
+                                <div class="input-group">
+                                    {{ form.email }}
+                                </div>
+                                <span class="small text-danger">{{ form.email.errors|striptags  }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group mb-4">
+                                    <div class="input-group">
+                                        {{ form.password1 }}
+                                    </div>
+                                    <span class="small text-danger">{{ form.password1.errors|striptags  }}</span>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <div class="input-group">
+                                        {{ form.password2 }}
+                                    </div>
+                                    <span class="small text-danger">{{ form.password2.errors|striptags  }}</span>
+                                </div>
+                            </div>
+
+                            {% comment %}
+                            <div class="form-group">
+                                <div class="input-group">
+                                    {{ form.captcha }}
+                                </div>
+                                <span class="small text-danger">{{ form.captcha.errors|striptags  }}</span>
+                            </div>
+                            {% endcomment %}
+                            <!-- End of Form -->
+                            <div class="d-grid" style="z-index:999">
+                                <button type="submit" name="register" class="btn-primary -800">Sign up</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 h-15">
+                <svg class="bottom-shapes-left" xmlns="http://www.w3.org/2000/svg" width="292" height="120" viewBox="0 0 292 120">
+                    <path id="Path_476" data-name="Path 476" d="M12,72a36,36,0,1,1,0,72H0v72H72V0H0V72Z" transform="translate(216) rotate(90)" fill="#f3af48" style="mix-blend-mode: multiply;isolation: isolate"/>
+                    <rect id="Rectangle_68" data-name="Rectangle 68" width="120" height="120" transform="translate(292 120) rotate(180)" fill="#82ab56" style="mix-blend-mode: multiply;isolation: isolate"/>
+                  </svg>
+            </div>
+            <span class="fw-normal small back-link">
+
+                <a class="highlight-link" value="Previous Page" onClick="javascript:history.go(-1);">Back</a>
+            </span>
+        </div>
+    </section>
+    {% include 'app/includes/messages.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}
