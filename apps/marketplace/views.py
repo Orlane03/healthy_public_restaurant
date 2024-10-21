@@ -135,35 +135,38 @@ def delete_cart(request, cart_id):
             return JsonResponse({'status':'Failed', 'message': 'Invalid request!'})
 
 def search(request):
-    if not 'address' in request.GET:
-        return redirect('marketplace')
-    else: 
-        address = request.GET['address']
-        latitude = request.GET['lat']
-        longitude = request.GET['lng']
-        radius = request.GET['radius']
-        keyword = request.GET['keyword']
-        
-        # get vendor ids that has the food item the user is looking for
-        fetch_vendors_by_fooditems = FoodItem.objects.filter(food_title__icontains=keyword, is_available=True).values_list('vendor', flat=True)
-        
-        vendors = Vendor.objects.filter(Q(id__in=fetch_vendors_by_fooditems) | Q(vendor_name__icontains=keyword, is_approved=True, user__is_active=True))
-        if latitude and longitude and radius:
-            pnt = GEOSGeometry('POINT(%s %s)' % (longitude, latitude))
-            vendors = Vendor.objects.filter(Q(id__in=fetch_vendors_by_fooditems) | Q(vendor_name__icontains=keyword, is_approved=True, user__is_active=True), 
-                                            user_profile__location__distance_lte=(pnt, D(km=radius))
-                                            ).annotate(distance=Distance("user_profile__location", pnt)).order_by("distance")
-        
-            for v in vendors:
-                v.kms = round(v.distance.km, 1)
-        vendor_count = vendors.count()
-        context = {
-            'vendors':vendors,
-            'vendor_count':vendor_count,
-            'source_location':address,
-        }
-        
-        return render(request, 'marketplace/listing.html', context)
+    # if not 'address' in request.GET:
+    #     print("rcfvg b,jhytnbyhtvgrf")
+    #     return redirect('marketplace')
+    # else:
+    print("bh g j,ythjbytvgrf")
+    # address = request.GET['address']
+    # latitude = request.GET['lat']
+    # longitude = request.GET['lng']
+    # radius = request.GET['radius']
+    keyword = request.GET['keyword']
+    print(keyword)
+
+    # get vendor ids that has the food item the user is looking for
+    fetch_vendors_by_fooditems = FoodItem.objects.filter(food_title__icontains=keyword, is_available=True).values_list('vendor', flat=True)
+
+    vendors = Vendor.objects.filter(Q(id__in=fetch_vendors_by_fooditems) | Q(vendor_name__icontains=keyword, is_approved=True, user__is_active=True))
+    # if latitude and longitude and radius:
+    #     pnt = GEOSGeometry('POINT(%s %s)' % (longitude, latitude))
+    #     vendors = Vendor.objects.filter(Q(id__in=fetch_vendors_by_fooditems) | Q(vendor_name__icontains=keyword, is_approved=True, user__is_active=True),
+    #                                     user_profile__location__distance_lte=(pnt, D(km=radius))
+    #                                     ).annotate(distance=Distance("user_profile__location", pnt)).order_by("distance")
+    #
+    #     for v in vendors:
+    #         v.kms = round(v.distance.km, 1)
+    vendor_count = vendors.count()
+    context = {
+        'vendors':vendors,
+        'vendor_count':vendor_count,
+        # 'source_location':address,
+    }
+
+    return render(request, 'marketplace/listing.html', context)
     
     
 @login_required(login_url='login')  
