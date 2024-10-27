@@ -11,8 +11,26 @@ from django.contrib.auth.decorators import login_required
 from apps.menu.models import FoodItem
 from apps.marketplace.models import Tax
 from django.contrib.sites.shortcuts import get_current_site
-
-
+# pour la gestion de commande et de paiement
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from .models import Order
+@login_required(login_url='login')
+def confirm_payment(request, order_number):
+    # Récupérer la commande en fonction du numéro de commande et de l'utilisateur connecté
+    order = get_object_or_404(Order, order_number=order_number, user=request.user)
+    
+    # Si le paiement n'est pas encore confirmé, le marquer comme confirmé
+    if not order.is_confirmed:
+        order.is_confirmed = True
+        order.save()
+        messages.success(request, 'Le paiement a été confirmé avec succès.')
+    else:
+        messages.info(request, 'Le paiement de cette commande a déjà été confirmé.')
+    
+    # Rediriger l'utilisateur vers sa page de commandes
+    return redirect('my_orders')
+#------->
 @login_required(login_url='login')
 def place_order(request):
     cart_items = Cart.objects.filter(user=request.user).order_by('created_at')
@@ -21,43 +39,42 @@ def place_order(request):
         return redirect('marketplace')
     
     vendors_ids = []
-    for i in cart_items:
-        if i.fooditem.vendor.id not in vendors_ids:
-            vendors_ids.append(i.fooditem.vendor.id)
+    for item in cart_items:
+        if item.fooditem.vendor.id not in vendors_ids:
+            vendors_ids.append(item.fooditem.vendor.id)
             
-    # {"vendor_id":{"subtotal":{"tax_type": {"tax+_percentage": "tax_amount"}}}}
+    # Calcul des taxes et du total pour chaque vendeur
     get_tax = Tax.objects.filter(is_active=True)
     subtotal = 0
     total_data = {}
     k = {}
-    for i in cart_items:
-        fooditem = FoodItem.objects.get(pk=i.fooditem.id, vendor_id__in=vendors_ids)
+    for item in cart_items:
+        fooditem = FoodItem.objects.get(pk=item.fooditem.id, vendor_id__in=vendors_ids)
         v_id = fooditem.vendor.id
         if v_id in k:
             subtotal = k[v_id]
-            subtotal += (fooditem.price * i.quantity)
+            subtotal += (fooditem.price * item.quantity)
             k[v_id] = subtotal
         else:
-            subtotal = (fooditem.price * i.quantity)
+            subtotal = (fooditem.price * item.quantity)
             k[v_id] = subtotal
             
-        # Calculate tax_data
+        # Calcul des données de taxe
         tax_dict = {}
-        for i in get_tax:
-            tax_type = i.tax_type
-            tax_percentage = i.tax_percentage
-            tax_amount = round((tax_percentage * subtotal)/100, 2)
-            tax_dict.update({tax_type: {str(tax_percentage) : str(tax_amount)}})
+        for tax in get_tax:
+            tax_type = tax.tax_type
+            tax_percentage = tax.tax_percentage
+            tax_amount = round((tax_percentage * subtotal) / 100, 2)
+            tax_dict.update({tax_type: {str(tax_percentage): str(tax_amount)}})
         
-        # construct total data
-        total_data.update({fooditem.vendor.id: {str(subtotal): str(tax_dict)}}) 
-    print(total_data)
-            
+        # Construction des données totales par vendeur
+        total_data.update({fooditem.vendor.id: {str(subtotal): str(tax_dict)}})
+
     subtotal = get_cart_amounts(request)['subtotal']
     total_tax = get_cart_amounts(request)['tax']
     grand_total = get_cart_amounts(request)['grand_total']
     tax_data = get_cart_amounts(request)['tax_dict']
-    print(tax_data)
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -76,11 +93,14 @@ def place_order(request):
             order.tax_data = json.dumps(tax_data)
             order.total_data = json.dumps(total_data)
             order.total_tax = total_tax
-            order.payment_method = request.POST['payment_method']
-            order.save() # order id/pk is generated 
+            order.is_confirmed = True  # Confirmer directement la commande
+            order.save()  # ID de la commande généré
+
+            # Génération du numéro de commande
             order.order_number = generate_order_number(order.id)
             order.vendors.add(*vendors_ids)
             order.save()
+
             context = {
                 'order': order,
                 'cart_items': cart_items,
@@ -88,11 +108,31 @@ def place_order(request):
             return render(request, 'orders/place_order.html', context)
         else:
             print(form.errors)
-    return render(request,  'orders/place_order.html')
+    return render(request, 'orders/place_order.html')
 
 
 @login_required(login_url='login')
 def payments(request):
+    if request.method == 'POST':
+        order_number = request.POST.get('order_number')
+        payment_method = request.POST.get('payment_method')
+        
+        # Récupérer la commande et mettre à jour le statut de paiement
+        try:
+            order = Order.objects.get(order_number=order_number, user=request.user)
+            order.is_ordered = True  # Confirme le paiement
+            order.payment_method = payment_method
+            order.save()
+            
+            # Rediriger vers la page de confirmation de commande
+            return redirect('order_complete')  # Assurez-vous que 'order_complete' est bien configurée pour afficher la confirmation
+        except Order.DoesNotExist:
+            return redirect('checkout')  # Redirection en cas d'échec
+
+    return HttpResponse('Invalid request method.', status=400)
+
+@login_required(login_url='login')
+def old_payments(request):
     # Check if the request is Ajax or not
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'POST':  
         # Store the payment details in the payment model
@@ -207,3 +247,15 @@ def order_complete(request):
     except:
         return redirect('home')
     
+@login_required(login_url='login')
+def my_orders(request):
+    # Récupérer les commandes de l'utilisateur connecté
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    
+    # Contexte passé au template
+    context = {
+        'orders': orders,
+    }
+    
+    # Rendre le template `my_orders.html` avec les données des commandes
+    return render(request, 'orders/my_orders.html', context)
