@@ -139,13 +139,13 @@ def search(request):
     #     print("rcfvg b,jhytnbyhtvgrf")
     #     return redirect('marketplace')
     # else:
-    print("bh g j,ythjbytvgrf")
+    # print("bh g j,ythjbytvgrf")
     # address = request.GET['address']
     # latitude = request.GET['lat']
     # longitude = request.GET['lng']
     # radius = request.GET['radius']
     keyword = request.GET['keyword']
-    print(keyword)
+    # print(keyword)
 
     # get vendor ids that has the food item the user is looking for
     fetch_vendors_by_fooditems = FoodItem.objects.filter(food_title__icontains=keyword, is_available=True).values_list('vendor', flat=True)
