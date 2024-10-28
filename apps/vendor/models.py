@@ -87,4 +87,19 @@ class OpeningHour(models.Model):
         
     def __str__(self):
         return self.get_day_display()
+
+
+class Table(models.Model):
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name="table_vendor")
+    name = models.CharField(max_length=200)
+    seats = models.IntegerField()
+    min_people = models.IntegerField()
+    max_people = models.IntegerField()
+
+    class Meta:
+        verbose_name = "Table"
+        verbose_name_plural = "Tables"
+
+    def __str__(self):
+       return self.vendor_name
     

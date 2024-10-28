@@ -5,6 +5,8 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.conf import settings
+import random
+import string
 
 def detectUser(user):
     if user.role == 1:
@@ -46,3 +48,16 @@ def send_notification(mail_subject, mail_template, context):
     mail = EmailMessage(mail_subject, message, from_email, to=to_email)
     mail.content_subtype = "html"
     mail.send()
+
+
+def generate_username(email):
+    """Allows you to retrieve the email address and generate a random username with this address"""
+    username = ""
+
+    part_one = email.split("@")[0]
+    bad_characters = ".'!?"
+
+    username += "".join(x for x in part_one if x not in bad_characters)
+    end = "".join(random.sample(string.ascii_lowercase + string.digits, 6))
+    username += "_" + end
+    return username

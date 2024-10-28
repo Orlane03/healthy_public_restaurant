@@ -21,6 +21,7 @@ from apps.orders.models import Order, OrderedFood
 @user_passes_test(check_role_vendor)
 def vprofile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
+    print(profile.profile_picture)
     vendor = get_object_or_404(Vendor, user=request.user)
     
     if request.method == 'POST':

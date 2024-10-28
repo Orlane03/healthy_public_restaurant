@@ -20,6 +20,8 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.marketplace import views as MarketplaceViews
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -44,4 +46,4 @@ urlpatterns = [
 
     # ORDERS
     path('orders/', include('apps.orders.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

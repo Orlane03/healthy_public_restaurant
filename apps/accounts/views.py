@@ -6,7 +6,7 @@ from apps.vendor.forms import VendorForm
 from .forms import UserForm
 from apps.accounts.models import User, UserProfile
 from django.contrib import messages, auth
-from .utils import detectUser, send_verification_email
+from .utils import detectUser, send_verification_email, generate_username
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.tokens import default_token_generator 
 
@@ -48,8 +48,8 @@ def registerUser(request):
             # create the user using create_user method
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-            username = form.cleaned_data['username']
             email = form.cleaned_data['email']
+            username = generate_username(email)
             password = form.cleaned_data['password']
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
             user.role = User.CUSTOMER
@@ -86,8 +86,8 @@ def registerVendor(request):
         if form.is_valid() and v_form.is_valid:
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-            username = form.cleaned_data['username']
             email = form.cleaned_data['email']
+            username = generate_username(email)
             password = form.cleaned_data['password']
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
             user.role = User.VENDOR
