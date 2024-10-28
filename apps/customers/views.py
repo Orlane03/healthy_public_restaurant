@@ -44,6 +44,16 @@ def my_orders(request):
     return render(request, 'customers/my_orders.html', context)
 
 
+def my_reservations(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+
+    context = {
+        'orders': orders,
+
+    }
+    return render(request, 'customers/my_orders.html', context)
+
+
 def order_detail(request, order_number):
     try:
         order = Order.objects.get(order_number=order_number, is_ordered=True)
