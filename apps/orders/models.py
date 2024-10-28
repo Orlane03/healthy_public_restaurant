@@ -42,26 +42,25 @@ class Order(models.Model):
     city = models.CharField(max_length=50)
     pin_code = models.CharField(max_length=10)
     total = models.FloatField()
-    tax_data = models.JSONField(blank=True, help_text = "Data format:{'tax_type':{'tax_percentage':'tax_amount'}}", null=True)
+    tax_data = models.JSONField(blank=True, help_text="Data format: {'tax_type':{'tax_percentage':'tax_amount'}}", null=True)
     total_data = models.JSONField(blank=True, null=True)
     total_tax = models.FloatField()
     payment_method = models.CharField(max_length=25)
     status = models.CharField(choices=STATUS, max_length=15, default='New')
     is_ordered = models.BooleanField(default=False)
+    is_confirmed = models.BooleanField(default=False)  # Nouveau champ pour la confirmation du paiement
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # concatenate first name and last name
     @property
     def name(self):
         return f'{self.first_name} {self.last_name}'
     
-    
     def order_placed_to(self):
         return ", ".join([str(i) for i in self.vendors.all()])
     
-    
     def get_total_by_vendor(self):
+        # Code existant pour calculer le total par vendeur
         vendor = Vendor.objects.get(user=request_object.user)
         subtotal = 0
         tax = 0
@@ -72,21 +71,14 @@ class Order(models.Model):
                  
             for key, val in data.items():
                 subtotal += float(key)
-                val = val.replace("'", '"') # value error dictionary has length 1 ; 2 is requires replace single quotation with double
+                val = val.replace("'", '"')
                 val = json.loads(val)
                 tax_dict.update(val)
 
-                # calculate tax
-                # {'Second-Tier-VAT': {'13.50': '2.63'}, 'Third-Tier-VAT': {'9.00': '1.76'}}
                 for i in val:
                     for j in val[i]:
-                        # print(val[i][j]) to print the value of the Second and Third Tier VAT 2.63 and 1.76
                         tax += float(val[i][j])
         grand_total = float(subtotal) + float(tax)
-        # print('subtotal==>', subtotal)
-        # print('tax==>', tax)
-        # print('tax_dict==>', tax_dict)
-        # print('grand_total==>', grand_total)
         context = {
             'subtotal': subtotal,
             'tax_dict': tax_dict,
@@ -95,9 +87,9 @@ class Order(models.Model):
             
         return context
 
-
     def __str__(self):
         return self.order_number
+
 
 
 class OrderedFood(models.Model):
