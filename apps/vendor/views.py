@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http.response import HttpResponse, JsonResponse
 from .forms import VendorForm, OpeningHourForm
 from apps.accounts.forms import UserProfileForm
-
+import simplejson as json
 from apps.accounts.models import UserProfile
 from .models import OpeningHour, Vendor
 from django.contrib import messages
@@ -15,6 +15,7 @@ from .utils import get_vendor
 from apps.menu.forms import CategoryForm, FoodItemForm
 from django.template.defaultfilters import slugify
 from apps.orders.models import Order, OrderedFood
+import datetime
 
 
 @login_required(login_url='login')
@@ -238,25 +239,56 @@ def order_detail(request, order_number):
     try:
         order = Order.objects.get(order_number=order_number, is_ordered=True)
         ordered_food = OrderedFood.objects.filter(order=order, fooditem__vendor=get_vendor(request))
-    
+        vendor = Vendor.objects.get(user=request.user)
+
+
+        print("ordered_food", ordered_food)
+
+        print(order.get_total_by_vendor())
+
         context = {
             'order': order,
             'ordered_food': ordered_food,
             'subtotal': order.get_total_by_vendor()['subtotal'],
             'tax_data': order.get_total_by_vendor()['tax_dict'],
             'grand_total': order.get_total_by_vendor()['grand_total'],
-        }  
-    except:
+        }
+    except Exception as e:
+        print(e)
         return redirect('vendor')
     return render(request, 'vendor/order_detail.html', context)
+
+
+def order_delete(request, order_number):
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True)
+        order.delete()
+        ordered_food = OrderedFood.objects.filter(order=order, fooditem__vendor=get_vendor(request))
+        ordered_food.delete()
+
+        return redirect("vendor_my_orders")
+    except Exception as e:
+        print(e)
+        return redirect('vendor')
 
 
 def my_orders(request):
     vendor = Vendor.objects.get(user=request.user)
     orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by('-created_at')
-    
+    current_month = datetime.datetime.now().month
+    current_month_orders = orders.filter(vendors__in=[vendor.id], created_at__month=current_month)
+    current_month_revenue = 0
+    for i in current_month_orders:
+        current_month_revenue += i.get_total_by_vendor()['grand_total']
+    total_revenue = 0
+    for i in orders:
+        total_revenue += i.get_total_by_vendor()['grand_total']
     context = {
        'orders': orders,
+        'orders_count': orders.count(),
+        'total_revenue': total_revenue,
+        'current_month_revenue': current_month_revenue,
+
     }
     return render(request, 'vendor/my_orders.html', context)
         

@@ -184,10 +184,10 @@ def checkout(request):
         'phone': request.user.phone_number,
         'email': request.user.email,
         'address': user_profile.address,
-        'country': user_profile.country,
+        # 'country': user_profile.country,
         'state': user_profile.state,
         'city': user_profile.city,
-        'pin_code': user_profile.pin_code,  
+        # 'pin_code': user_profile.pin_code,
     }
     form = OrderForm(initial=default_values)
     context = {

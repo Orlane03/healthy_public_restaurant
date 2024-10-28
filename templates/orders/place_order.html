@@ -20,7 +20,7 @@
                                         <div>{{ order.state }}, {{ order.country }}</div>
                                         <div><b>Phone: </b>{{ order.phone }}</div>
                                         <div><b>Email: </b>{{ order.email }}</div>
-                                        <div><b>Payment: </b>{{ order.payment_method }}</div>
+<!--                                        <div><b>Payment: </b>{{ order.payment_method }}</div>-->
                                         <br>
                                         <div><a href="{% url 'checkout' %}" class="btn btn-outline-danger">Edit</a></div>
                                         <br>
@@ -87,7 +87,7 @@
                                             {% csrf_token %}
                                             <input type="hidden" name="order_number" value="{{ order.order_number }}">
                                             <input type="hidden" name="payment_method" value="Manual">
-                                            <button type="submit" class="btn btn-danger w-100 p-2 mt-3">Confirm Payment</button>
+                                            <button type="submit" class="btn btn-danger w-100 p-2 mt-3">Confirm Order</button>
                                         </form>
                                     </div>
                                 </div>

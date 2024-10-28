@@ -57,19 +57,24 @@ def my_reservations(request):
 def order_detail(request, order_number):
     try:
         order = Order.objects.get(order_number=order_number, is_ordered=True)
-        ordered_food = OrderedFood.objects.filter(order=order)      
+        print(order)
+        ordered_food = OrderedFood.objects.filter(order=order.pk)
+        print(ordered_food)
         subtotal = 0
         for item in ordered_food:
+            print("je suis venu ici")
+            print(item)
             subtotal += (item.price * item.quantity)
-        tax_data = json.loads(order.tax_data)
+        # tax_data = json.loads(order.tax_data)
         context = {
             'order': order,
             'ordered_food': ordered_food,
             'subtotal': subtotal,
-            'tax_data': tax_data,
+            # 'tax_data': tax_data,
             
         }
         return render(request, 'customers/order_detail.html', context)
-    except:
+    except Exception as e:
+        print(e)
         return redirect('customer')
     
