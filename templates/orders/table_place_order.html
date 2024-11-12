@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-section min-height pt-5">
+    <div class="page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="tabs-holder horizontal">
+                        <ul class="stickynav-tabs nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-shopping-cart text-danger"></i>Customer Information</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane in active">
+                                <div class="menu-itam-holder">
+                                    <div class="billing-address">
+                                        <div><b>{{ request.user.full_name }}</b></div>
+                                        <div>{{ customer.address }}</div>
+<!--                                        <div>{{ order.city }} - {{ order.pin_code }}</div>-->
+                                        <div>{{ customer.state }}, {{ customer.country }}</div>
+                                        <div><b>Phone: </b>{% if request.user.phone_number %} {{ request.user.phone_number }} {% else %} Undefined {% endif %}</div>
+                                        <div><b>Email: </b>{{ request.user.email }}</div>
+<!--                                        <div><b>Payment: </b>{{ order.payment_method }}</div>-->
+                                        <br>
+<!--                                        <div><a href="{% url 'checkout' %}" class="btn btn-outline-danger">Edit</a></div>-->
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Details and Confirmation Section -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="tabs-holder horizontal">
+                        <ul class="stickynav-tabs nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#order"><i class="icon- icon-room_service"></i>Your Reservation</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="order" class="tab-pane in active">
+                                <div class="menu-itam-holder" style="padding:8px 20px 0;">
+                                    <div>
+                                        <table class="table">
+                                            <tbody>
+<!--                                                {% for item in cart_items %}-->
+                                                <tr>
+<!--                                                    <td><img src="{{ item.fooditem.image.url }}" width="60" alt="Food Image"></td>-->
+                                                    <td><b style="line-height:20px;">{{ table.name }}</b></td>
+                                                    <td>{{ table.seats }}</td>
+                                                    <td>VND{{ table.price }}</td>
+                                                </tr>
+<!--                                                {% endfor %}-->
+                                            </tbody>
+                                        </table>
+                                        <ul>
+                                            <li style="list-style-type: none;">
+                                                Subtotal
+                                                <span class="price float-right">
+                                                    <span class="currency">VND</span>
+                                                    <span id="subtotal">{{ table.price }}</span>
+                                                </span>
+                                            </li>
+<!--                                            {% for key, value in tax_dict.items %}-->
+<!--                                            {% for i, j in value.items %}-->
+<!--                                            <li style="list-style-type: none;">-->
+<!--                                                {{ key }} <small>({{ i }}%)</small>-->
+<!--                                                <span class="price float-right">-->
+<!--                                                    <span class="currency">VND</span>-->
+<!--                                                    <span id="tax-{{ key }}">{{ j }}</span>-->
+<!--                                                </span>-->
+<!--                                            </li>-->
+<!--                                            {% endfor %}-->
+<!--                                            {% endfor %}-->
+
+                                            <li style="list-style-type: none; font-weight:600">
+                                                TOTAL
+                                                <span class="price float-right">
+                                                    <span class="currency">VND</span>
+                                                    <span id="total">{{ table.price }}</span>
+                                                </span>
+                                            </li>
+                                        </ul>
+
+                                        <!-- Confirm Payment Button -->
+                                        <form action="{% url 'confirmation_reservation' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="table_id" value="{{ table.id }}">
+                                            <input type="hidden" name="payment_method" value="Manual">
+                                            <button type="submit" class="btn btn-danger w-100 p-2 mt-3">Confirm Reservation</button>
+                                            <br>
+                                            <br>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

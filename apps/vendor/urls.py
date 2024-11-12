@@ -26,5 +26,16 @@ urlpatterns = [
     path('order_detail/<int:order_number>/', views.order_detail, name='vendor_order_detail'),
     path('order_delete/<int:order_number>/', views.order_delete, name='vendor_order_delete'),
     path('my_orders/', views.my_orders, name='vendor_my_orders'),
+
+    path('my_reservations/', views.my_reservations, name='vendor_my_reservations'),
+
+    path('table-builder/', views.table_builder, name='table_builder'),
+    path('table-builder/add/', views.add_table, name='add_table'),
+    path('table-builder/edit/<int:pk>/', views.edit_table, name='edit_table'),
+    path('table-builder/delete/<int:pk>/', views.delete_table, name='delete_table'),
+
+    path('<slug:vendor_slug>/tables/', views.vendor_tables, name='vendor_tables'),
+    path('<slug:vendor_slug>/tables/<str:table_number>', views.vendor_table_detail, name='vendor_table_detail'),
+    path('tables/place-table/<int:pk>', views.place_order_table, name='place_order_table'),
 ]
 

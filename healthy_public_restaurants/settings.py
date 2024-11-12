@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # 'django.contrib.gis',
     'apps.customers',
     'apps.orders',
+    'apps.reservations',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +99,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'defaultdb',
+#         'USER': 'avnadmin',
+#         'PASSWORD': 'AVNS_KUZtBifgUR7w8MTbkCW',
+#         'HOST': 'healthy-amedeelougbegnon3-c483.d.aivencloud.com',
+#         'PORT': '19698',
+#     }
+# }
 
 AUTH_USER_MODEL = 'accounts.User'
 

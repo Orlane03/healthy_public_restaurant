@@ -17,6 +17,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .models import Order
+
+
 @login_required(login_url='login')
 def confirm_payment(request, order_number):
     # Récupérer la commande en fonction du numéro de commande et de l'utilisateur connecté
@@ -73,7 +75,7 @@ def place_order(request):
         # Construction des données totales par vendeur
         total_data.update({fooditem.vendor.id: {str(subtotal): str(subtotal)}})
 
-        print(total_data)
+    print(total_data)
 
     subtotal = get_cart_amounts(request)['subtotal']
     total_tax = get_cart_amounts(request)['tax']
@@ -147,6 +149,8 @@ def payments(request):
             return redirect('checkout')  # Redirection en cas d'échec
 
     return HttpResponse('Invalid request method.', status=400)
+
+
 
 @login_required(login_url='login')
 def old_payments(request):
@@ -243,9 +247,9 @@ def old_payments(request):
 def order_complete(request, order_number):
     # order_number = request.GET.get('order_number')
     # transaction_id = request.GET.get('trans_id')
-    print("order_number", order_number)
+    # print("order_number", order_number)
     # print("transaction_id", transaction_id)
-    print("fbehgdvfgcbdghdg")
+    # print("fbehgdvfgcbdghdg")
     
     try:
         order = Order.objects.get(order_number=order_number, is_ordered=True)
@@ -254,7 +258,9 @@ def order_complete(request, order_number):
         print("Je suis rentré dans le try")
         
         subtotal = 0
+        print("1")
         for item in ordered_food:
+            print("2")
             subtotal += (item.price * item.quantity)
             
         # tax_data = json.loads(order.tax_data)
@@ -262,20 +268,31 @@ def order_complete(request, order_number):
 
         # Update the order model
         # order.payment = payment
+        print("3")
         order.is_ordered = True
+        print("4")
         order.save()
 
         # Move the Cart items to ordered food model
         cart_items = Cart.objects.filter(user=request.user)
+        print("4")
         for item in cart_items:
+            print("5")
             ordered_food = OrderedFood()
+            print("6")
             ordered_food.order = order
+            print("7")
             # ordered_food.payment = payment
             ordered_food.user = request.user
+            print("8")
             ordered_food.fooditem = item.fooditem
+            print("9")
             ordered_food.quantity = item.quantity
+            print("10")
             ordered_food.price = item.fooditem.price
+            print("11")
             ordered_food.amount = item.fooditem.price * item.quantity  # total amount
+            print("12")
             ordered_food.save()
 
         # Send order confirmation email to the customer
@@ -284,8 +301,11 @@ def order_complete(request, order_number):
 
         ordered_food = OrderedFood.objects.filter(order=order)
         customer_subtotal = 0
+        print("13")
         for item in ordered_food:
+            print("14")
             customer_subtotal += (item.price * item.quantity)
+            print("15")
         # tax_data = json.loads(order.tax_data)
         arguments = {
             'user': request.user,
@@ -310,13 +330,16 @@ def order_complete(request, order_number):
                 print(ordered_food_to_vendor)
                 # print('to_emails=>', to_emails)
 
+                # print(order_total_by_vendor(order, i.fooditem.vendor.id)['subtotal'])
+                print('debug')
+
                 arguments = {
                     'order': order,
                     'to_email': i.fooditem.vendor.user.email,
                     'ordered_food_to_vendor': ordered_food_to_vendor,
-                    'vendor_subtotal': order_total_by_vendor(order, i.fooditem.vendor.id)['subtotal'],
-                    'tax_data': order_total_by_vendor(order, i.fooditem.vendor.id)['tax_dict'],
-                    'vendor_grand_total': order_total_by_vendor(order, i.fooditem.vendor.id)['grand_total'],
+                    # 'vendor_subtotal': order_total_by_vendor(order, i.fooditem.vendor.id)['subtotal'],
+                    # 'tax_data': order_total_by_vendor(order, i.fooditem.vendor.id)['tax_dict'],
+                    # 'vendor_grand_total': order_total_by_vendor(order, i.fooditem.vendor.id)['grand_total'],
                 }
                 send_notification(mail_subject, mail_template, arguments)
 
@@ -334,8 +357,9 @@ def order_complete(request, order_number):
     except Exception as e:
         print('Je coince ici')
         print(e)
-        return redirect('home')
-    
+        # return redirect('home')
+
+
 @login_required(login_url='login')
 def my_orders(request):
     # Récupérer les commandes de l'utilisateur connecté

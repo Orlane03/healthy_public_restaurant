@@ -89,17 +89,41 @@ class OpeningHour(models.Model):
         return self.get_day_display()
 
 
+STATUS_TABLE = (
+    (0, 'UNAVAILABLE'),
+    (1, 'AVAILABLE'),
+    (2, "CLOSED")
+)
+
 class Table(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name="table_vendor")
     name = models.CharField(max_length=200)
+    number = models.CharField(max_length=200, default='')
+    description = models.TextField(max_length=250, blank=True, null=True)
     seats = models.IntegerField()
-    min_people = models.IntegerField()
-    max_people = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.PositiveSmallIntegerField(choices=STATUS_TABLE, default=0, blank=False, null=False)
+    # min_people = models.IntegerField()
+    # max_people = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_status(self):
+        status = ""
+        if self.status == 0:
+            status = 'UNAVAILABLE'
+        if self.status == 1:
+            status = 'AVAILABLE'
+        if self.status == 2:
+            status = "CLOSED"
+        return status
+
 
     class Meta:
         verbose_name = "Table"
         verbose_name_plural = "Tables"
 
     def __str__(self):
-       return self.vendor_name
+       return self.name
     
