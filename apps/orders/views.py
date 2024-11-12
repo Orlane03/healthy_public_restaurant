@@ -337,9 +337,9 @@ def order_complete(request, order_number):
                     'order': order,
                     'to_email': i.fooditem.vendor.user.email,
                     'ordered_food_to_vendor': ordered_food_to_vendor,
-                    'vendor_subtotal': order_total_by_vendor(order, i.fooditem.vendor.id)['subtotal'],
-                    'tax_data': order_total_by_vendor(order, i.fooditem.vendor.id)['tax_dict'],
-                    'vendor_grand_total': order_total_by_vendor(order, i.fooditem.vendor.id)['grand_total'],
+                    # 'vendor_subtotal': order_total_by_vendor(order, i.fooditem.vendor.id)['subtotal'],
+                    # 'tax_data': order_total_by_vendor(order, i.fooditem.vendor.id)['tax_dict'],
+                    # 'vendor_grand_total': order_total_by_vendor(order, i.fooditem.vendor.id)['grand_total'],
                 }
                 send_notification(mail_subject, mail_template, arguments)
 
@@ -357,7 +357,7 @@ def order_complete(request, order_number):
     except Exception as e:
         print('Je coince ici')
         print(e)
-        # return redirect('home')
+        return redirect('home')
 
 
 @login_required(login_url='login')
