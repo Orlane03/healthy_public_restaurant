@@ -59,25 +59,27 @@
                                             <table class="table table-hover" id="myOrdersTable">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Number #</th>
-<!--                                                        <th scope="col">Name</th>-->
+                                                        <th scope="col">Reservation #</th>
+                                                        <th scope="col">Name</th>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Total</th>
                                                         <th scope="col">Status</th>
-                                                        <th scope="col">Date of reservation</th>
-                                                        <th scope="col">Creation Date</th>
-<!--                                                        <th scope="col">Action</th>-->
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {% for reservation in reservations %}
                                                     <tr>
-                                                        <td><b><a href="" class="text-dark">{{ reservation.number }}</a></b></td>
-                                                        <td>{{ reservation.table.name }}</td>
+                                                        <td><b><a href="{% url 'reservation_detail_customer' reservation.number %}" class="text-dark">{{ reservation.number }}</a></b></td>
+                                                        <td>{{ reservation.name }}</td>
                                                         <td>VND{{ reservation.total }}</td>
-                                                        <td>{{ reservation.get_status }}</td>
-                                                        <td>{{ reservation.created_at }}</td>
-                                                        <td>{{ reservation.reservation_date }}</td>
+                                                        <td>{{ order.status }}</td>
+                                                        <td>{{ order.created_at }}</td>
+                                                        <td>
+                                                            <a href="{% url 'reservation_detail' reservation.number %}" class="btn btn-primary">Details</a>
+                                                            <a href="{% url 'reservation_customer_delete' reservation.number %}" class="btn btn-danger">Delete</a>
+                                                        </td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

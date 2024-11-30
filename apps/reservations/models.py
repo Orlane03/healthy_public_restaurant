@@ -19,10 +19,28 @@ class Reservations(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICE, default=0, blank=False, null=False)
+    is_ordered = models.BooleanField(default=False)
+    is_confirmed = models.BooleanField(default=False)
+    number = models.CharField(max_length=20, default="")
+    total = models.FloatField(default=0)
 
     class Meta:
         verbose_name = "Reservation"
         verbose_name_plural = "Reservation"
+
+
+    @property
+    def get_status(self):
+        status = ""
+        if self.status == 0:
+            status = 'CREATED'
+        elif self.status == 1:
+            status = 'PENDING'
+        elif self.status == 2:
+            status = "CANCELLED"
+        elif self.status == 0:
+            status = "DONE"
+        return status
 
     def __unicode__(self):
         return self.customer.full_name

@@ -104,7 +104,7 @@ class Table(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.PositiveSmallIntegerField(choices=STATUS_TABLE, default=0, blank=False, null=False)
     # min_people = models.IntegerField()
-    # max_people = models.IntegerField()
+    image = models.ImageField(upload_to='tableimages')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 

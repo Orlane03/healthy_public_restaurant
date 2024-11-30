@@ -17,8 +17,3 @@ class FoodItemForm(forms.ModelForm):
         model = FoodItem
         fields = ['category', 'food_title', 'description', 'price', 'image', 'is_available']
 
-
-class TableForm(forms.ModelForm):
-    class Meta:
-        model = Table
-        fields = ['name', 'description', "seats",]

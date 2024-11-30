@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns = [
     path('reservation/confirm/', views.confirmation_reservation, name='confirmation_reservation'),
-    # path('order_complete/<str:order_number>', views.order_complete, name='order_complete'),
+    path('reservation_complete/<str:reservation_number>', views.reservation_complete, name='reservation_complete'),
+    path('vendor/reservation_detail/<str:number>', views.reservation_detail, name='reservation_detail_vendor'),
     # path('confirm_payment/<str:order_number>/', views.confirm_payment, name='confirm_payment'),
-    # path('my_orders/', views.my_orders, name='my_orders'),  # URL pour accéder à my_orders
+    path('c_reservations/', views.c_reservations, name='c_reservations'),
 ]

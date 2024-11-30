@@ -15,12 +15,12 @@
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="user-dashboard loader-holder">
                         <div class="user-holder">
-                            <h5 class="text-uppercase">Build your food menu</h5>
+                            <h5 class="text-uppercase">Build your table menu</h5>
                             <hr>
                             <button class="btn btn-secondary" onclick="history.back()"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
                             <br><br>
                             <h6>Add New Table</h6>
-                            <form action="" method="POST">
+                            <form action="" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-fields-set">
                                     <div class="row">
@@ -40,6 +40,18 @@
                                             <div class="field-holder">
                                                 <label>Number of seat *</label>
                                                 {{form.seats}}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label>Price *</label>
+                                                {{form.price}}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label>Image *</label>
+                                                {{form.image}}
                                             </div>
                                         </div>
                                     </div>

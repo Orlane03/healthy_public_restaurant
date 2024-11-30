@@ -28,6 +28,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div>
+                            {{ form.media }}
+                            <form action="{% url 'confirmation_reservation' %}" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="hidden" name="table_id" value="{{ table.id }}">
+                                <input type="hidden" name="payment_method" value="Manual">
+                                <button type="submit" class="btn btn-danger w-100 p-2 mt-3">Confirm Reservation</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
@@ -83,11 +94,9 @@
                                         </ul>
 
                                         <!-- Confirm Payment Button -->
-                                        <form action="{% url 'confirmation_reservation' %}" method="post">
+                                        <form action="" method="post">
                                             {% csrf_token %}
-                                            <input type="hidden" name="table_id" value="{{ table.id }}">
-                                            <input type="hidden" name="payment_method" value="Manual">
-                                            <button type="submit" class="btn btn-danger w-100 p-2 mt-3">Confirm Reservation</button>
+
                                             <br>
                                             <br>
                                         </form>

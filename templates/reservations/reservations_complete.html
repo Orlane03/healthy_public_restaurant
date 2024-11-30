@@ -7,28 +7,29 @@
                 <button class="btn btn-success text-right mt-3" onclick="printDiv('section-to-print')">Download</button>
                 <div class="row">
                     <div class="col-md-6">
-                        <h4 class="mt-2 mb-3">Thank you for your order</h4>
+                        <h4 class="mt-2 mb-3">Thank you for your reservation</h4>
                     </div>
                     <div class="col-md-6 text-right">
-                        <p class="mb-0">{{ order.name }}</p>
-                        <p class="mb-0">{{ order.address }}</p>
-                        <p class="mb-0">{{ order.phone }}</p>
-                        <p class="mb-0">{{ order.email }}</p>
+                        <p class="mb-0">{{ reservation.customer.user.full_name }}</p>
+                        <p class="mb-0">{{ reservation.customer.user.address }}</p>
+                        <p class="mb-0">{{ reservation.customer.user.phone }}</p>
+                        <p class="mb-0">{{ reservation.customer.user.email }}</p>
                     </div>
                 </div>
 
-                <h6>Hello {{ order.name }},</h6><span>Thank you for your order. Review your order details below </span>
+                <h6>Hello {{ reservation.customer.user.full_name }},</h6><span>Thank you for your reservation. Review your reservation details below </span>
                 <hr>
                 <div class="d-flex justify-content-between">
                     <div>
-                        <span class="d-block">Order Date: </span><span class="font-weight-bold">{{ order.created_at }}</span>
+                        <span class="d-block">Date of creation: </span><span class="font-weight-bold">{{ reservation.created_at }}</span>
                     </div>
                     <div>
-                        <span class="d-block">Order Number: </span><span class="font-weight-bold">{{ order.order_number }}</span>
+                        <span class="d-block">Reservation Date: </span><span class="font-weight-bold">{{ reservation.reservation_date }}</span>
                     </div>
-<!--                    <div>-->
-<!--                        <span class="d-block">Payment Method: </span><span class="font-weight-bold">{{ order.payment_method }}</span>-->
-<!--                    </div>-->
+                    <div>
+                        <span class="d-block">Reservation Number: </span><span class="font-weight-bold">{{ reservation.number }}</span>
+                    </div>
+
 <!--                    <div>-->
 <!--                        <span class="d-block">Transaction ID: </span><span class="font-weight-bold">{{ order.payment.transaction_id }}</span>-->
 <!--                    </div>-->
@@ -36,18 +37,16 @@
                 <hr>
                 <table class="table">
                     <tbody>
-                        {% for item in ordered_food %}
                         <tr>
-                            <td><img src="{{ item.fooditem.image.url }}" width="60" alt="Food Image"></td>
+                            {% if table.image %}
+                            <td><img src="{{ table.image.url }}" width="60" alt="Food Image"></td>
+                            {% endif %}
                             <td>
-                                <p class="mb-0"><b>{{ item.fooditem }}</b></p>
-                                <a class="text-muted" href="{% url 'vendor_detail' item.fooditem.vendor.vendor_slug  %}">{{ item.fooditem.vendor.vendor_name }}</a>
-
+                                <p class="mb-0"><b>{{ table.name }}</b></p>
+                                <a class="text-muted" href="#">{{ table.name }}</a>
                             </td>
-                            <td>{{ item.quantity }} QTY</td>
-                            <td>VND{{ item.fooditem.price }}</td>
+                            <td>VND{{ table.price }}</td>
                         </tr>
-                        {% endfor %}
                     </tbody>
                 </table>
                 <div class="row mt-5">
@@ -56,28 +55,28 @@
                     </div>
                     <div class="col-md-6">
                         <ul>
-                            <li style="list-style-type: none;">
-                                Subtotal
-                                <span class="price float-right">
-                                    <span class="currency">VND</span>
-                                <span id="subtotal">{{ subtotal }}</span>
-                                </span>
-                            </li>
-                            {% for key, value in tax_data.items %} {% for i, j in value.items %}
-                            <li style="list-style-type: none;">
-                                {{ key }} <small>({{ i }}%)</small>
-                                <span class="price float-right">
-                                            <span class="currency">VND</span>
-                                <span id="tax-{{ key }}">{{ j }}</span>
-                                </span>
-                            </li>
-                            {% endfor %} {% endfor %}
+<!--                            <li style="list-style-type: none;">-->
+<!--                                Subtotal-->
+<!--                                <span class="price float-right">-->
+<!--                                    <span class="currency">VND</span>-->
+<!--                                <span id="subtotal">{{ subtotal }}</span>-->
+<!--                                </span>-->
+<!--                            </li>-->
+<!--                            {% for key, value in tax_data.items %} {% for i, j in value.items %}-->
+<!--                            <li style="list-style-type: none;">-->
+<!--                                {{ key }} <small>({{ i }}%)</small>-->
+<!--                                <span class="price float-right">-->
+<!--                                            <span class="currency">VND</span>-->
+<!--                                <span id="tax-{{ key }}">{{ j }}</span>-->
+<!--                                </span>-->
+<!--                            </li>-->
+<!--                            {% endfor %} {% endfor %}-->
 
                             <li style="list-style-type: none; font-weight:600">
                                 TOTAL
                                 <span class="price float-right">
                                     <span class="currency">VND</span>
-                                <span id="total">{{ order.total }}</span>
+                                <span id="total">{{ reservation.total }}</span>
                                 </span>
                             </li>
                         </ul>
@@ -86,12 +85,14 @@
                 <hr>
                 <div class="d-flex justify-content-between">
                     <div>
-                        <span class="d-block font-weight-bold">Thank you for ordering with us.</span>
+                        <span class="d-block font-weight-bold">Thank you for reservation with us.</span>
                         <span>Healthy Food Chart</span>
                     </div>
                        <a href="{% url 'marketplace' %}" class="float-right">
                            <button type="button" class="btn btn-danger w-100 p-2 mt-3">Exit</button>
                        </a>
+
+
 
 <!--                    <div class="d-flex justify-content-end align-items-end">-->
 <!--                        <span class="d-block font-weight-bold">Need help? </span>-->

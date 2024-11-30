@@ -96,7 +96,9 @@
                                         <!-- food item -->
                                         <ul>
                                             <li>
-<!--                                                <div class="image-holder"><img src="{{ food.image.url }}" alt="dish image"></div>-->
+                                                {% if table.image %}
+                                                <div class="image-holder"><img src="{{ table.image.url }}" alt="dish image"></div>
+                                                {% endif %}
                                                 <div class="text-holder">
                                                     <div class="element-title" id="menu-category-2">
                                                         <h5 class="text-color">{{ table.name }}</h5>
@@ -108,7 +110,11 @@
                                                     <span class="price">Seats: {{ table.seats }}</span>
                                                 </div>
                                                 <div class="">
-                                                    <a href="{% url 'place_order_table' table.id %}">Choose</a>
+                                                    <a href="{% url 'place_order_table' table.id %}">
+                                                        <button type="button" class="btn btn-danger w-100 p-2 mt-3">
+                                                            Choose
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </li>
                                         </ul>

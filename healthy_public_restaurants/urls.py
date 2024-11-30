@@ -38,6 +38,9 @@ urlpatterns = [
     # CART
     path('', include("apps.customers.urls")),
 
+    # CART
+    path('', include("apps.reservations.urls")),
+
     # SEARCH
     path('search/', MarketplaceViews.search, name='search'),
 

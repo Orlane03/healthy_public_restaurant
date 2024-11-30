@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% load static %} {% block content %} {% include 'includes/alerts.html' %}
+
+<div class="main-section">
+    {% include 'includes/cover.html' %}
+    <div class="page-section account-header buyer-logged-in">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <!-- Load the sidebar here -->
+                    {% include 'includes/v_sidebar.html' %}
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="user-dashboard loader-holder">
+                        <div class="user-holder">
+                            <div class="container">
+                                <div class="justify-content-center row">
+                                    <div class="col-md-12">
+                                        <div class="bg-white p-1">
+                                            <img src="{% static 'logo/logo_restaurant.png' %}" alt="loveForFood Logo" width="250">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4 class="mt-2 mb-3">Thank you for your reservation</h4>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <p class="mb-0">{{ reservation.customer.user.full_name }}</p>
+                                                    <p class="mb-0">{{ reservation.customer.user.address }}</p>
+                                                    <p class="mb-0">{{ reservation.customer.user.phone }}</p>
+                                                    <p class="mb-0">{{ reservation.customer.user.email }}</p>
+                                                </div>
+                                            </div>
+
+                                            <h6>Hello {{ reservation.customer.user.full_name }},</h6><span>Thank you for your reservation. Review your reservation details below </span>
+                                            <hr>
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <span class="d-block">Created at: </span><span class="font-weight-bold">{{ reservation.created_at }}</span>
+                                                </div>
+                                                <div>
+                                                    <span class="d-block">Reservation Date: </span><span class="font-weight-bold">{{ reservation.reservation_date }}</span>
+                                                </div>
+                                                <div>
+                                                    <span class="d-block">Number: </span><span class="font-weight-bold">{{ reservation.number }}</span>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        {% if table.image %}
+                                                        <td><img src="{{ table.image.url }}" width="60" alt="Food Image"></td>
+                                                        {% endif %}
+                                                        <td>
+                                                            <p class="mb-0"><b>{{ table.name }}</b></p>
+                                                            <a class="text-muted" href="#">{{ table.name }}</a>
+                                                        </td>
+                                                        <td>VND{{ table.price }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row mt-5">
+                                                <div class="d-flex justify-content-center col-md-6">
+                                                    <img src="{% static 'images/paid.png' %}" alt="" width="150">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul>
+                                                        <li style="list-style-type: none; font-weight:600">
+                                                            TOTAL
+                                                            <span class="price float-right">
+                                                                <span class="currency">VND</span>
+                                                            <span id="total">{{ reservation.total }}</span>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <span class="d-block font-weight-bold">Thank you for ordering with us.</span>
+                                                    <span>Healthy Food Chart</span>
+                                                </div>
+<!--                                                <div class="d-flex justify-content-end align-items-end">-->
+<!--                                                    <span class="d-block font-weight-bold">Need help? </span>-->
+<!--                                                    <span> Call - +353 560604268</span>-->
+<!--                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

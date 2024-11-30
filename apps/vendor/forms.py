@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Vendor, OpeningHour
+from .models import Vendor, OpeningHour, Table
 from apps.accounts.validators import allow_only_images_validator
 
 class VendorForm(forms.ModelForm):
@@ -13,3 +13,10 @@ class OpeningHourForm(forms.ModelForm):
     class Meta:
         model = OpeningHour
         fields = ['day', 'from_hour', 'to_hour', 'is_closed']
+
+
+class TableForm(forms.ModelForm):
+    image = forms.FileField(widget=forms.FileInput(attrs={'class': 'btn btn-info w-100'}), validators=[allow_only_images_validator])
+    class Meta:
+        model = Table
+        fields = ['name', 'description', "seats", "image", 'price',]

@@ -343,6 +343,9 @@ def order_complete(request, order_number):
                 }
                 send_notification(mail_subject, mail_template, arguments)
 
+        # Suppression du panier
+        cart_items.delete()
+
         context = {
             'order': order,
             'ordered_food': ordered_food,

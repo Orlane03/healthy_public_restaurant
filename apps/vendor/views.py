@@ -2,7 +2,7 @@ from django.db import IntegrityError
 from urllib import response
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http.response import HttpResponse, JsonResponse
-from .forms import VendorForm, OpeningHourForm
+from .forms import VendorForm, OpeningHourForm, TableForm
 from apps.accounts.forms import UserProfileForm
 import simplejson as json
 from apps.accounts.models import UserProfile
@@ -12,17 +12,17 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from apps.accounts.views import check_role_vendor
 from apps.menu.models import Category, FoodItem
 from .utils import get_vendor
-from apps.menu.forms import CategoryForm, FoodItemForm, TableForm
+from apps.menu.forms import CategoryForm, FoodItemForm
 from django.template.defaultfilters import slugify
 from apps.orders.models import Order, OrderedFood
-import datetime
 from datetime import date, datetime
 from django.db.models import Prefetch
-
 from ..marketplace.context_processors import get_cart_amounts
 from ..marketplace.models import Cart, Tax
 from ..orders.forms import OrderForm
 from ..orders.utils import generate_order_number
+from ..reservations.forms import ReservationForm
+from ..reservations.models import Reservations
 
 
 @login_required(login_url='login')
@@ -359,7 +359,7 @@ def vendor_table_detail(request, table_number):
     # print("fbehgdvfgcbdghdg")
 
     try:
-        table = Table.objects.get(order_number=table_number, is_ordered=True)
+        table = Table.objects.get(number=table_number, is_ordered=True)
         print(table)
         ordered_food = OrderedFood.objects.filter(order=table)
         print("Je suis rentré dans le try")
@@ -452,50 +452,23 @@ def vendor_table_detail(request, table_number):
 def place_order_table(request, pk):
     print(pk)
     table = Table.objects.get(pk=pk)
+    vendor = Vendor.objects.get(pk=table.vendor.id)
+    print(vendor)
     customer = UserProfile.objects.get(user=request.user)
     print(customer.address)
     print(customer.state)
     print(customer.country)
     print(request.user.phone_number)
 
-    cart_items = Cart.objects.filter(user=request.user).order_by('created_at')
-    cart_count = cart_items.count()
-    if cart_count <= 0:
-        return redirect('marketplace')
 
     vendors_ids = []
-    for item in cart_items:
-        if item.fooditem.vendor.id not in vendors_ids:
-            vendors_ids.append(item.fooditem.vendor.id)
+
 
     # Calcul des taxes et du total pour chaque vendeur
     get_tax = Tax.objects.filter(is_active=True)
     subtotal = 0
     total_data = {}
     k = {}
-    for item in cart_items:
-        fooditem = FoodItem.objects.get(pk=item.fooditem.id, vendor_id__in=vendors_ids)
-        v_id = fooditem.vendor.id
-        if v_id in k:
-            subtotal = k[v_id]
-            subtotal += (fooditem.price * item.quantity)
-            k[v_id] = subtotal
-        else:
-            subtotal = (fooditem.price * item.quantity)
-            k[v_id] = subtotal
-
-        # Calcul des données de taxe
-        # tax_dict = {}
-        # for tax in get_tax:
-        #     tax_type = tax.tax_type
-        #     tax_percentage = tax.tax_percentage
-        #     tax_amount = round((tax_percentage * subtotal) / 100, 2)
-        #     tax_dict.update({tax_type: {str(tax_percentage): str(tax_amount)}})
-
-        # Construction des données totales par vendeur
-        total_data.update({fooditem.vendor.id: {str(subtotal): str(subtotal)}})
-
-        print(total_data)
 
     subtotal = get_cart_amounts(request)['subtotal']
     total_tax = get_cart_amounts(request)['tax']
@@ -504,48 +477,31 @@ def place_order_table(request, pk):
 
     form = OrderForm()
 
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            order = Order()
-            order.first_name = form.cleaned_data['first_name']
-            order.last_name = form.cleaned_data['last_name']
-            order.phone = form.cleaned_data['phone']
-            order.email = form.cleaned_data['email']
-            order.address = form.cleaned_data['address']
-            # order.country = form.cleaned_data['country']
-            order.state = form.cleaned_data['state']
-            order.city = form.cleaned_data['city']
-            # order.pin_code = form.cleaned_data['pin_code']
-            order.user = request.user
-            order.total = grand_total
-            # order.tax_data = json.dumps(tax_data)
-            order.total_data = json.dumps(total_data)
-            # order.total_tax = total_tax
-            order.is_confirmed = True  # Confirmer directement la commande
-            order.save()  # ID de la commande généré
-
-            # Génération du numéro de commande
-            order.order_number = generate_order_number(order.id)
-            order.vendors.add(*vendors_ids)
-            order.save()
-
-            context = {
-                'order': order,
-                'cart_items': cart_items,
-            }
-            return render(request, 'orders/table_place_order.html', context)
-        else:
-            print(form.errors)
-    else:
-        form = OrderForm()
+    # if request.method == 'POST':
+    #     form = OrderForm(request.POST)
+    #     formReservation = ReservationForm(request.POST)
+    #     if form.is_valid():
+    #         print("je suis venu ici")
+    #         reservation = Reservations()
+    #         reservation.customer = customer
+    #         reservation.restaurant = vendor
+    #         reservation.table = table
+    #         reservation.reservation_date = formReservation.cleaned_data['reservation_date']
+    #
+    #         # return render(request, 'orders/table_place_order.html', context)
+    #     else:
+    #         print(form.errors)
+    # else:
+    #     form = OrderForm()
+    formReservation = ReservationForm()
         # print(form.errors)
 
     print(table)
 
     context = {
+        'form': formReservation,
         'table': table,
-        'cart_items': cart_items,
+        # 'cart_items': cart_items,
         "customer": customer,
     }
     print('hbvfhvbgfv fgvt')
@@ -557,18 +513,11 @@ def place_order_table(request, pk):
 @user_passes_test(check_role_vendor)
 def add_table(request):
     if request.method == 'POST':
-        form = TableForm(request.POST)
+        form = TableForm(request.POST, request.FILES)
         if form.is_valid():
-
-            # category_name = form.cleaned_data['category_name']
             table = form.save(commit=False)
             table.vendor = get_vendor(request)
-
             table.save()  # when the category object is saved the the category id will be generated
-            # category.slug = slugify(category_name) + '-' + str(
-                # category.id)  # chicken-15 first is name second is category id
-            table.save()
-
             table.number = generate_order_number(table.id)
             table.save()
             messages.success(request, 'Table added successfully!')
@@ -588,7 +537,7 @@ def add_table(request):
 def edit_table(request, pk=None):
     table = get_object_or_404(Table, pk=pk)
     if request.method == 'POST':
-        form = TableForm(request.POST, instance=table)
+        form = TableForm(request.POST, request.FILES, instance=table)
         if form.is_valid():
             # category_name = form.cleaned_data['category_name']
             table = form.save(commit=False)
@@ -619,18 +568,20 @@ def delete_table(request, pk=None):
 
 def my_reservations(request):
     vendor = Vendor.objects.get(user=request.user)
-    orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by('-created_at')
-    current_month = datetime.datetime.now().month
-    current_month_orders = orders.filter(vendors__in=[vendor.id], created_at__month=current_month)
+    reservations = Reservations.objects.filter(restaurant=vendor.id, is_ordered=True).order_by('-created_at')
+    current_month = datetime.now().month
+    current_month_orders = reservations.filter(restaurant=vendor.id, created_at__month=current_month)
     current_month_revenue = 0
     for i in current_month_orders:
-        current_month_revenue += i.get_total_by_vendor()['grand_total']
+        # current_month_revenue += i.get_total_by_vendor()['grand_total']
+        current_month_revenue += i.total
     total_revenue = 0
-    for i in orders:
-        total_revenue += i.get_total_by_vendor()['grand_total']
+    for i in reservations:
+        total_revenue += i.total
+        # total_revenue += i.get_total_by_vendor()['grand_total']
     context = {
-       'orders': orders,
-        'orders_count': orders.count(),
+        'reservations': reservations,
+        'reservations_count': reservations.count(),
         'total_revenue': total_revenue,
         'current_month_revenue': current_month_revenue,
 
